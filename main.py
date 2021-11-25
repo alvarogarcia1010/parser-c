@@ -17,7 +17,8 @@ indexTokenV1 = 0
 indexToken = 0
 counter = 0
 
-tokens = readSource('./Examples/FailedExample.c')
+tokens = readSource('./Examples/SuccessfulExample.c')
+#tokens = readSource('./Examples/FailedExample.c')
 
 for token in tokens:
   if token.type not in [Types.SPACE]:
@@ -68,8 +69,11 @@ while (len(stack) > 0):
 	if x == parserTokens[position] and x == 'EOF':
 		#Estructura if creada para imprimir los syntaxErrors si los hay, o sino mostrar que no
 		if (len(syntaxErrors) != 0):
+			print("Fallo al compilar:")
 			for error in syntaxErrors:
 					print(error)
+		else:
+			print("Programa compilado con exito")
 		break
 	else:
 		if x == parserTokens[position] and x != 'EOF':
@@ -100,5 +104,5 @@ while (len(stack) > 0):
 				stack.pop()
 				agregar_pila(celda)
 				x=stack[-1]
-	print(stack)
+	#print(stack)
 
