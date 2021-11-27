@@ -1,0 +1,3906 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> declarationList
+Rule 2     declarationList -> declarationList declaration
+Rule 3     declarationList -> declaration
+Rule 4     declaration -> varDeclaration
+Rule 5     declaration -> funDeclaration
+Rule 6     declaration -> comment
+Rule 7     comment -> BLOCKCOMMENT
+Rule 8     varDeclaration -> typeSpecifier varDeclList SEMMICOLON
+Rule 9     varDeclList -> varDeclList COMMA varDecInitialize
+Rule 10    varDeclList -> varDecInitialize
+Rule 11    varDecInitialize -> varDeclId
+Rule 12    varDecInitialize -> varDeclId ASSIGMENT simpleExpression
+Rule 13    varDeclId -> IDENTIFIER
+Rule 14    varDeclId -> IDENTIFIER LBRACKET INTNUMBER RBRACKET
+Rule 15    typeSpecifier -> INT
+Rule 16    typeSpecifier -> FLOAT
+Rule 17    typeSpecifier -> CHAR
+Rule 18    typeSpecifier -> BOOL
+Rule 19    typeSpecifier -> VOID
+Rule 20    funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement
+Rule 21    params -> paramList
+Rule 22    params -> empty
+Rule 23    paramList -> paramList SEMMICOLON paramTypeList
+Rule 24    paramList -> paramTypeList
+Rule 25    paramTypeList -> typeSpecifier paramIdList
+Rule 26    paramIdList -> paramIdList COMMA paramId
+Rule 27    paramIdList -> paramId
+Rule 28    paramId -> IDENTIFIER
+Rule 29    paramId -> IDENTIFIER LBRACKET RBRACKET
+Rule 30    compoundStmt -> LBRACE localDeclarations statementList RBRACE
+Rule 31    localDeclarations -> localDeclarations varDeclaration
+Rule 32    localDeclarations -> empty
+Rule 33    statementList -> statementList statement
+Rule 34    statementList -> empty
+Rule 35    statementList -> comment
+Rule 36    statement -> expressionStmt
+Rule 37    statement -> compoundStmt
+Rule 38    statement -> selectionStmt
+Rule 39    statement -> iterationStmt
+Rule 40    statement -> returnStmt
+Rule 41    statement -> breakStmt
+Rule 42    expressionStmt -> expression SEMMICOLON
+Rule 43    expressionStmt -> SEMMICOLON
+Rule 44    selectionStmt -> IF LPAREN expression RPAREN statement
+Rule 45    selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement
+Rule 46    iterationStmt -> WHILE LPAREN expression RPAREN statement
+Rule 47    iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+Rule 48    iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement
+Rule 49    returnStmt -> RETURN SEMMICOLON
+Rule 50    returnStmt -> RETURN expression SEMMICOLON
+Rule 51    breakStmt -> BREAK SEMMICOLON
+Rule 52    expression -> IDENTIFIER ASSIGMENT expression
+Rule 53    expression -> IDENTIFIER PLUS ASSIGMENT expression
+Rule 54    expression -> IDENTIFIER MINUS ASSIGMENT expression
+Rule 55    expression -> simpleExpression
+Rule 56    var -> IDENTIFIER
+Rule 57    var -> IDENTIFIER LBRACKET expression RBRACKET
+Rule 58    simpleExpression -> simpleExpression OR orExpression
+Rule 59    simpleExpression -> orExpression
+Rule 60    orExpression -> orExpression AND unaryRelExpression
+Rule 61    orExpression -> unaryRelExpression
+Rule 62    unaryRelExpression -> NOT unaryRelExpression
+Rule 63    unaryRelExpression -> relExpression
+Rule 64    relExpression -> addExpression relop addExpression
+Rule 65    relExpression -> addExpression
+Rule 66    relop -> GREATER
+Rule 67    relop -> LOWER
+Rule 68    relop -> EQUALS
+Rule 69    relop -> GREATERTHAN
+Rule 70    relop -> LOWERTHAN
+Rule 71    addExpression -> addExpression addop term
+Rule 72    addExpression -> term
+Rule 73    addop -> PLUS
+Rule 74    addop -> MINUS
+Rule 75    term -> term mulop unaryExpression
+Rule 76    term -> unaryExpression
+Rule 77    mulop -> TIMES
+Rule 78    mulop -> DIVIDE
+Rule 79    mulop -> MOD
+Rule 80    unaryExpression -> unaryExpression
+Rule 81    unaryExpression -> factor
+Rule 82    factor -> LBRACKET expression RBRACKET
+Rule 83    factor -> var
+Rule 84    factor -> call
+Rule 85    factor -> constant
+Rule 86    constant -> INTNUMBER
+Rule 87    constant -> FLOATNUMBER
+Rule 88    constant -> FALSE
+Rule 89    constant -> TRUE
+Rule 90    call -> IDENTIFIER LBRACKET args RBRACKET
+Rule 91    args -> argList
+Rule 92    args -> empty
+Rule 93    argList -> argList COMMA expression
+Rule 94    argList -> expression
+Rule 95    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 60
+ASSIGMENT            : 12 52 53 54
+BLOCKCOMMENT         : 7
+BOOL                 : 18
+BREAK                : 51
+CHAR                 : 17
+COMMA                : 9 26 93
+DIVIDE               : 78
+DO                   : 48
+ELSE                 : 45
+EQUALS               : 68
+FALSE                : 88
+FLOAT                : 16
+FLOATNUMBER          : 87
+FOR                  : 47
+GREATER              : 66
+GREATERTHAN          : 69
+IDENTIFIER           : 13 14 20 28 29 47 47 52 53 54 56 57 90
+IF                   : 44 45
+IN                   : 47
+INT                  : 15
+INTNUMBER            : 14 86
+LBRACE               : 30
+LBRACKET             : 14 29 57 82 90
+LOWER                : 67
+LOWERTHAN            : 70
+LPAREN               : 20 44 45 46 47 48
+MINUS                : 54 74
+MOD                  : 79
+NOT                  : 62
+OR                   : 58
+PLUS                 : 53 73
+RBRACE               : 30
+RBRACKET             : 14 29 57 82 90
+RETURN               : 49 50
+RPAREN               : 20 44 45 46 47 48
+SEMMICOLON           : 8 23 42 43 49 50 51
+TIMES                : 77
+TRUE                 : 89
+VOID                 : 19
+WHILE                : 46 48
+error                : 
+
+Nonterminals, with rules where they appear
+
+addExpression        : 64 64 65 71
+addop                : 71
+argList              : 91 93
+args                 : 90
+breakStmt            : 41
+call                 : 84
+comment              : 6 35
+compoundStmt         : 37
+constant             : 85
+declaration          : 2 3
+declarationList      : 1 2
+empty                : 22 32 34 92
+expression           : 42 44 45 46 48 50 52 53 54 57 82 93 94
+expressionStmt       : 36
+factor               : 81
+funDeclaration       : 5
+iterationStmt        : 39
+localDeclarations    : 30 31
+mulop                : 75
+orExpression         : 58 59 60
+paramId              : 26 27
+paramIdList          : 25 26
+paramList            : 21 23
+paramTypeList        : 23 24
+params               : 20
+program              : 0
+relExpression        : 63
+relop                : 64
+returnStmt           : 40
+selectionStmt        : 38
+simpleExpression     : 12 55 58
+statement            : 20 33 44 45 45 46 47 48 48
+statementList        : 30 33
+term                 : 71 72 75
+typeSpecifier        : 8 20 25
+unaryExpression      : 75 76 80
+unaryRelExpression   : 60 61 62
+var                  : 83
+varDecInitialize     : 9 10
+varDeclId            : 11 12
+varDeclList          : 8 9
+varDeclaration       : 4 31
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . declarationList
+    (2) declarationList -> . declarationList declaration
+    (3) declarationList -> . declaration
+    (4) declaration -> . varDeclaration
+    (5) declaration -> . funDeclaration
+    (6) declaration -> . comment
+    (8) varDeclaration -> . typeSpecifier varDeclList SEMMICOLON
+    (20) funDeclaration -> . typeSpecifier IDENTIFIER LPAREN params RPAREN statement
+    (7) comment -> . BLOCKCOMMENT
+    (15) typeSpecifier -> . INT
+    (16) typeSpecifier -> . FLOAT
+    (17) typeSpecifier -> . CHAR
+    (18) typeSpecifier -> . BOOL
+    (19) typeSpecifier -> . VOID
+
+    BLOCKCOMMENT    shift and go to state 8
+    INT             shift and go to state 9
+    FLOAT           shift and go to state 10
+    CHAR            shift and go to state 11
+    BOOL            shift and go to state 12
+    VOID            shift and go to state 13
+
+    program                        shift and go to state 1
+    declarationList                shift and go to state 2
+    declaration                    shift and go to state 3
+    varDeclaration                 shift and go to state 4
+    funDeclaration                 shift and go to state 5
+    comment                        shift and go to state 6
+    typeSpecifier                  shift and go to state 7
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> declarationList .
+    (2) declarationList -> declarationList . declaration
+    (4) declaration -> . varDeclaration
+    (5) declaration -> . funDeclaration
+    (6) declaration -> . comment
+    (8) varDeclaration -> . typeSpecifier varDeclList SEMMICOLON
+    (20) funDeclaration -> . typeSpecifier IDENTIFIER LPAREN params RPAREN statement
+    (7) comment -> . BLOCKCOMMENT
+    (15) typeSpecifier -> . INT
+    (16) typeSpecifier -> . FLOAT
+    (17) typeSpecifier -> . CHAR
+    (18) typeSpecifier -> . BOOL
+    (19) typeSpecifier -> . VOID
+
+    $end            reduce using rule 1 (program -> declarationList .)
+    BLOCKCOMMENT    shift and go to state 8
+    INT             shift and go to state 9
+    FLOAT           shift and go to state 10
+    CHAR            shift and go to state 11
+    BOOL            shift and go to state 12
+    VOID            shift and go to state 13
+
+    declaration                    shift and go to state 14
+    varDeclaration                 shift and go to state 4
+    funDeclaration                 shift and go to state 5
+    comment                        shift and go to state 6
+    typeSpecifier                  shift and go to state 7
+
+state 3
+
+    (3) declarationList -> declaration .
+
+    BLOCKCOMMENT    reduce using rule 3 (declarationList -> declaration .)
+    INT             reduce using rule 3 (declarationList -> declaration .)
+    FLOAT           reduce using rule 3 (declarationList -> declaration .)
+    CHAR            reduce using rule 3 (declarationList -> declaration .)
+    BOOL            reduce using rule 3 (declarationList -> declaration .)
+    VOID            reduce using rule 3 (declarationList -> declaration .)
+    $end            reduce using rule 3 (declarationList -> declaration .)
+
+
+state 4
+
+    (4) declaration -> varDeclaration .
+
+    BLOCKCOMMENT    reduce using rule 4 (declaration -> varDeclaration .)
+    INT             reduce using rule 4 (declaration -> varDeclaration .)
+    FLOAT           reduce using rule 4 (declaration -> varDeclaration .)
+    CHAR            reduce using rule 4 (declaration -> varDeclaration .)
+    BOOL            reduce using rule 4 (declaration -> varDeclaration .)
+    VOID            reduce using rule 4 (declaration -> varDeclaration .)
+    $end            reduce using rule 4 (declaration -> varDeclaration .)
+
+
+state 5
+
+    (5) declaration -> funDeclaration .
+
+    BLOCKCOMMENT    reduce using rule 5 (declaration -> funDeclaration .)
+    INT             reduce using rule 5 (declaration -> funDeclaration .)
+    FLOAT           reduce using rule 5 (declaration -> funDeclaration .)
+    CHAR            reduce using rule 5 (declaration -> funDeclaration .)
+    BOOL            reduce using rule 5 (declaration -> funDeclaration .)
+    VOID            reduce using rule 5 (declaration -> funDeclaration .)
+    $end            reduce using rule 5 (declaration -> funDeclaration .)
+
+
+state 6
+
+    (6) declaration -> comment .
+
+    BLOCKCOMMENT    reduce using rule 6 (declaration -> comment .)
+    INT             reduce using rule 6 (declaration -> comment .)
+    FLOAT           reduce using rule 6 (declaration -> comment .)
+    CHAR            reduce using rule 6 (declaration -> comment .)
+    BOOL            reduce using rule 6 (declaration -> comment .)
+    VOID            reduce using rule 6 (declaration -> comment .)
+    $end            reduce using rule 6 (declaration -> comment .)
+
+
+state 7
+
+    (8) varDeclaration -> typeSpecifier . varDeclList SEMMICOLON
+    (20) funDeclaration -> typeSpecifier . IDENTIFIER LPAREN params RPAREN statement
+    (9) varDeclList -> . varDeclList COMMA varDecInitialize
+    (10) varDeclList -> . varDecInitialize
+    (11) varDecInitialize -> . varDeclId
+    (12) varDecInitialize -> . varDeclId ASSIGMENT simpleExpression
+    (13) varDeclId -> . IDENTIFIER
+    (14) varDeclId -> . IDENTIFIER LBRACKET INTNUMBER RBRACKET
+
+    IDENTIFIER      shift and go to state 16
+
+    varDeclList                    shift and go to state 15
+    varDecInitialize               shift and go to state 17
+    varDeclId                      shift and go to state 18
+
+state 8
+
+    (7) comment -> BLOCKCOMMENT .
+
+    BLOCKCOMMENT    reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    INT             reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    FLOAT           reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    CHAR            reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    BOOL            reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    VOID            reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    $end            reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    RBRACE          reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    SEMMICOLON      reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    LBRACE          reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    IF              reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    WHILE           reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    FOR             reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    DO              reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    RETURN          reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    BREAK           reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    IDENTIFIER      reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    NOT             reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    LBRACKET        reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    INTNUMBER       reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    FLOATNUMBER     reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    FALSE           reduce using rule 7 (comment -> BLOCKCOMMENT .)
+    TRUE            reduce using rule 7 (comment -> BLOCKCOMMENT .)
+
+
+state 9
+
+    (15) typeSpecifier -> INT .
+
+    IDENTIFIER      reduce using rule 15 (typeSpecifier -> INT .)
+
+
+state 10
+
+    (16) typeSpecifier -> FLOAT .
+
+    IDENTIFIER      reduce using rule 16 (typeSpecifier -> FLOAT .)
+
+
+state 11
+
+    (17) typeSpecifier -> CHAR .
+
+    IDENTIFIER      reduce using rule 17 (typeSpecifier -> CHAR .)
+
+
+state 12
+
+    (18) typeSpecifier -> BOOL .
+
+    IDENTIFIER      reduce using rule 18 (typeSpecifier -> BOOL .)
+
+
+state 13
+
+    (19) typeSpecifier -> VOID .
+
+    IDENTIFIER      reduce using rule 19 (typeSpecifier -> VOID .)
+
+
+state 14
+
+    (2) declarationList -> declarationList declaration .
+
+    BLOCKCOMMENT    reduce using rule 2 (declarationList -> declarationList declaration .)
+    INT             reduce using rule 2 (declarationList -> declarationList declaration .)
+    FLOAT           reduce using rule 2 (declarationList -> declarationList declaration .)
+    CHAR            reduce using rule 2 (declarationList -> declarationList declaration .)
+    BOOL            reduce using rule 2 (declarationList -> declarationList declaration .)
+    VOID            reduce using rule 2 (declarationList -> declarationList declaration .)
+    $end            reduce using rule 2 (declarationList -> declarationList declaration .)
+
+
+state 15
+
+    (8) varDeclaration -> typeSpecifier varDeclList . SEMMICOLON
+    (9) varDeclList -> varDeclList . COMMA varDecInitialize
+
+    SEMMICOLON      shift and go to state 19
+    COMMA           shift and go to state 20
+
+
+state 16
+
+    (20) funDeclaration -> typeSpecifier IDENTIFIER . LPAREN params RPAREN statement
+    (13) varDeclId -> IDENTIFIER .
+    (14) varDeclId -> IDENTIFIER . LBRACKET INTNUMBER RBRACKET
+
+    LPAREN          shift and go to state 21
+    ASSIGMENT       reduce using rule 13 (varDeclId -> IDENTIFIER .)
+    SEMMICOLON      reduce using rule 13 (varDeclId -> IDENTIFIER .)
+    COMMA           reduce using rule 13 (varDeclId -> IDENTIFIER .)
+    LBRACKET        shift and go to state 22
+
+
+state 17
+
+    (10) varDeclList -> varDecInitialize .
+
+    SEMMICOLON      reduce using rule 10 (varDeclList -> varDecInitialize .)
+    COMMA           reduce using rule 10 (varDeclList -> varDecInitialize .)
+
+
+state 18
+
+    (11) varDecInitialize -> varDeclId .
+    (12) varDecInitialize -> varDeclId . ASSIGMENT simpleExpression
+
+    SEMMICOLON      reduce using rule 11 (varDecInitialize -> varDeclId .)
+    COMMA           reduce using rule 11 (varDecInitialize -> varDeclId .)
+    ASSIGMENT       shift and go to state 23
+
+
+state 19
+
+    (8) varDeclaration -> typeSpecifier varDeclList SEMMICOLON .
+
+    BLOCKCOMMENT    reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    INT             reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    FLOAT           reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    CHAR            reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    BOOL            reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    VOID            reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    $end            reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    RBRACE          reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    SEMMICOLON      reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    LBRACE          reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    IF              reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    WHILE           reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    FOR             reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    DO              reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    RETURN          reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    BREAK           reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    IDENTIFIER      reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    NOT             reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    LBRACKET        reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    INTNUMBER       reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    FLOATNUMBER     reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    FALSE           reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+    TRUE            reduce using rule 8 (varDeclaration -> typeSpecifier varDeclList SEMMICOLON .)
+
+
+state 20
+
+    (9) varDeclList -> varDeclList COMMA . varDecInitialize
+    (11) varDecInitialize -> . varDeclId
+    (12) varDecInitialize -> . varDeclId ASSIGMENT simpleExpression
+    (13) varDeclId -> . IDENTIFIER
+    (14) varDeclId -> . IDENTIFIER LBRACKET INTNUMBER RBRACKET
+
+    IDENTIFIER      shift and go to state 25
+
+    varDecInitialize               shift and go to state 24
+    varDeclId                      shift and go to state 18
+
+state 21
+
+    (20) funDeclaration -> typeSpecifier IDENTIFIER LPAREN . params RPAREN statement
+    (21) params -> . paramList
+    (22) params -> . empty
+    (23) paramList -> . paramList SEMMICOLON paramTypeList
+    (24) paramList -> . paramTypeList
+    (95) empty -> .
+    (25) paramTypeList -> . typeSpecifier paramIdList
+    (15) typeSpecifier -> . INT
+    (16) typeSpecifier -> . FLOAT
+    (17) typeSpecifier -> . CHAR
+    (18) typeSpecifier -> . BOOL
+    (19) typeSpecifier -> . VOID
+
+    RPAREN          reduce using rule 95 (empty -> .)
+    INT             shift and go to state 9
+    FLOAT           shift and go to state 10
+    CHAR            shift and go to state 11
+    BOOL            shift and go to state 12
+    VOID            shift and go to state 13
+
+    typeSpecifier                  shift and go to state 26
+    params                         shift and go to state 27
+    paramList                      shift and go to state 28
+    empty                          shift and go to state 29
+    paramTypeList                  shift and go to state 30
+
+state 22
+
+    (14) varDeclId -> IDENTIFIER LBRACKET . INTNUMBER RBRACKET
+
+    INTNUMBER       shift and go to state 31
+
+
+state 23
+
+    (12) varDecInitialize -> varDeclId ASSIGMENT . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    simpleExpression               shift and go to state 32
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 24
+
+    (9) varDeclList -> varDeclList COMMA varDecInitialize .
+
+    SEMMICOLON      reduce using rule 9 (varDeclList -> varDeclList COMMA varDecInitialize .)
+    COMMA           reduce using rule 9 (varDeclList -> varDeclList COMMA varDecInitialize .)
+
+
+state 25
+
+    (13) varDeclId -> IDENTIFIER .
+    (14) varDeclId -> IDENTIFIER . LBRACKET INTNUMBER RBRACKET
+
+    ASSIGMENT       reduce using rule 13 (varDeclId -> IDENTIFIER .)
+    SEMMICOLON      reduce using rule 13 (varDeclId -> IDENTIFIER .)
+    COMMA           reduce using rule 13 (varDeclId -> IDENTIFIER .)
+    LBRACKET        shift and go to state 22
+
+
+state 26
+
+    (25) paramTypeList -> typeSpecifier . paramIdList
+    (26) paramIdList -> . paramIdList COMMA paramId
+    (27) paramIdList -> . paramId
+    (28) paramId -> . IDENTIFIER
+    (29) paramId -> . IDENTIFIER LBRACKET RBRACKET
+
+    IDENTIFIER      shift and go to state 52
+
+    paramIdList                    shift and go to state 50
+    paramId                        shift and go to state 51
+
+state 27
+
+    (20) funDeclaration -> typeSpecifier IDENTIFIER LPAREN params . RPAREN statement
+
+    RPAREN          shift and go to state 53
+
+
+state 28
+
+    (21) params -> paramList .
+    (23) paramList -> paramList . SEMMICOLON paramTypeList
+
+    RPAREN          reduce using rule 21 (params -> paramList .)
+    SEMMICOLON      shift and go to state 54
+
+
+state 29
+
+    (22) params -> empty .
+
+    RPAREN          reduce using rule 22 (params -> empty .)
+
+
+state 30
+
+    (24) paramList -> paramTypeList .
+
+    SEMMICOLON      reduce using rule 24 (paramList -> paramTypeList .)
+    RPAREN          reduce using rule 24 (paramList -> paramTypeList .)
+
+
+state 31
+
+    (14) varDeclId -> IDENTIFIER LBRACKET INTNUMBER . RBRACKET
+
+    RBRACKET        shift and go to state 55
+
+
+state 32
+
+    (12) varDecInitialize -> varDeclId ASSIGMENT simpleExpression .
+    (58) simpleExpression -> simpleExpression . OR orExpression
+
+    SEMMICOLON      reduce using rule 12 (varDecInitialize -> varDeclId ASSIGMENT simpleExpression .)
+    COMMA           reduce using rule 12 (varDecInitialize -> varDeclId ASSIGMENT simpleExpression .)
+    OR              shift and go to state 56
+
+
+state 33
+
+    (59) simpleExpression -> orExpression .
+    (60) orExpression -> orExpression . AND unaryRelExpression
+
+    OR              reduce using rule 59 (simpleExpression -> orExpression .)
+    SEMMICOLON      reduce using rule 59 (simpleExpression -> orExpression .)
+    COMMA           reduce using rule 59 (simpleExpression -> orExpression .)
+    RBRACKET        reduce using rule 59 (simpleExpression -> orExpression .)
+    RPAREN          reduce using rule 59 (simpleExpression -> orExpression .)
+    AND             shift and go to state 57
+
+
+state 34
+
+    (61) orExpression -> unaryRelExpression .
+
+    AND             reduce using rule 61 (orExpression -> unaryRelExpression .)
+    OR              reduce using rule 61 (orExpression -> unaryRelExpression .)
+    SEMMICOLON      reduce using rule 61 (orExpression -> unaryRelExpression .)
+    COMMA           reduce using rule 61 (orExpression -> unaryRelExpression .)
+    RBRACKET        reduce using rule 61 (orExpression -> unaryRelExpression .)
+    RPAREN          reduce using rule 61 (orExpression -> unaryRelExpression .)
+
+
+state 35
+
+    (62) unaryRelExpression -> NOT . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    unaryRelExpression             shift and go to state 58
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 36
+
+    (63) unaryRelExpression -> relExpression .
+
+    AND             reduce using rule 63 (unaryRelExpression -> relExpression .)
+    OR              reduce using rule 63 (unaryRelExpression -> relExpression .)
+    SEMMICOLON      reduce using rule 63 (unaryRelExpression -> relExpression .)
+    COMMA           reduce using rule 63 (unaryRelExpression -> relExpression .)
+    RBRACKET        reduce using rule 63 (unaryRelExpression -> relExpression .)
+    RPAREN          reduce using rule 63 (unaryRelExpression -> relExpression .)
+
+
+state 37
+
+    (64) relExpression -> addExpression . relop addExpression
+    (65) relExpression -> addExpression .
+    (71) addExpression -> addExpression . addop term
+    (66) relop -> . GREATER
+    (67) relop -> . LOWER
+    (68) relop -> . EQUALS
+    (69) relop -> . GREATERTHAN
+    (70) relop -> . LOWERTHAN
+    (73) addop -> . PLUS
+    (74) addop -> . MINUS
+
+    AND             reduce using rule 65 (relExpression -> addExpression .)
+    OR              reduce using rule 65 (relExpression -> addExpression .)
+    SEMMICOLON      reduce using rule 65 (relExpression -> addExpression .)
+    COMMA           reduce using rule 65 (relExpression -> addExpression .)
+    RBRACKET        reduce using rule 65 (relExpression -> addExpression .)
+    RPAREN          reduce using rule 65 (relExpression -> addExpression .)
+    GREATER         shift and go to state 61
+    LOWER           shift and go to state 62
+    EQUALS          shift and go to state 63
+    GREATERTHAN     shift and go to state 64
+    LOWERTHAN       shift and go to state 65
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+
+    relop                          shift and go to state 59
+    addop                          shift and go to state 60
+
+state 38
+
+    (72) addExpression -> term .
+    (75) term -> term . mulop unaryExpression
+    (77) mulop -> . TIMES
+    (78) mulop -> . DIVIDE
+    (79) mulop -> . MOD
+
+    GREATER         reduce using rule 72 (addExpression -> term .)
+    LOWER           reduce using rule 72 (addExpression -> term .)
+    EQUALS          reduce using rule 72 (addExpression -> term .)
+    GREATERTHAN     reduce using rule 72 (addExpression -> term .)
+    LOWERTHAN       reduce using rule 72 (addExpression -> term .)
+    PLUS            reduce using rule 72 (addExpression -> term .)
+    MINUS           reduce using rule 72 (addExpression -> term .)
+    AND             reduce using rule 72 (addExpression -> term .)
+    OR              reduce using rule 72 (addExpression -> term .)
+    SEMMICOLON      reduce using rule 72 (addExpression -> term .)
+    COMMA           reduce using rule 72 (addExpression -> term .)
+    RBRACKET        reduce using rule 72 (addExpression -> term .)
+    RPAREN          reduce using rule 72 (addExpression -> term .)
+    TIMES           shift and go to state 69
+    DIVIDE          shift and go to state 70
+    MOD             shift and go to state 71
+
+    mulop                          shift and go to state 68
+
+state 39
+
+    (76) term -> unaryExpression .
+    (80) unaryExpression -> unaryExpression .
+
+  ! reduce/reduce conflict for TIMES resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for DIVIDE resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for MOD resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for GREATER resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for LOWER resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for GREATERTHAN resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for LOWERTHAN resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for PLUS resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for MINUS resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for AND resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for OR resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for SEMMICOLON resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for COMMA resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for RBRACKET resolved using rule 76 (term -> unaryExpression .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 76 (term -> unaryExpression .)
+    TIMES           reduce using rule 76 (term -> unaryExpression .)
+    DIVIDE          reduce using rule 76 (term -> unaryExpression .)
+    MOD             reduce using rule 76 (term -> unaryExpression .)
+    GREATER         reduce using rule 76 (term -> unaryExpression .)
+    LOWER           reduce using rule 76 (term -> unaryExpression .)
+    EQUALS          reduce using rule 76 (term -> unaryExpression .)
+    GREATERTHAN     reduce using rule 76 (term -> unaryExpression .)
+    LOWERTHAN       reduce using rule 76 (term -> unaryExpression .)
+    PLUS            reduce using rule 76 (term -> unaryExpression .)
+    MINUS           reduce using rule 76 (term -> unaryExpression .)
+    AND             reduce using rule 76 (term -> unaryExpression .)
+    OR              reduce using rule 76 (term -> unaryExpression .)
+    SEMMICOLON      reduce using rule 76 (term -> unaryExpression .)
+    COMMA           reduce using rule 76 (term -> unaryExpression .)
+    RBRACKET        reduce using rule 76 (term -> unaryExpression .)
+    RPAREN          reduce using rule 76 (term -> unaryExpression .)
+
+  ! TIMES           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! DIVIDE          [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! MOD             [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! GREATER         [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! LOWER           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! EQUALS          [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! GREATERTHAN     [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! LOWERTHAN       [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! PLUS            [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! MINUS           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! AND             [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! OR              [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! SEMMICOLON      [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! COMMA           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! RBRACKET        [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! RPAREN          [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+
+
+state 40
+
+    (81) unaryExpression -> factor .
+
+    TIMES           reduce using rule 81 (unaryExpression -> factor .)
+    DIVIDE          reduce using rule 81 (unaryExpression -> factor .)
+    MOD             reduce using rule 81 (unaryExpression -> factor .)
+    GREATER         reduce using rule 81 (unaryExpression -> factor .)
+    LOWER           reduce using rule 81 (unaryExpression -> factor .)
+    EQUALS          reduce using rule 81 (unaryExpression -> factor .)
+    GREATERTHAN     reduce using rule 81 (unaryExpression -> factor .)
+    LOWERTHAN       reduce using rule 81 (unaryExpression -> factor .)
+    PLUS            reduce using rule 81 (unaryExpression -> factor .)
+    MINUS           reduce using rule 81 (unaryExpression -> factor .)
+    AND             reduce using rule 81 (unaryExpression -> factor .)
+    OR              reduce using rule 81 (unaryExpression -> factor .)
+    SEMMICOLON      reduce using rule 81 (unaryExpression -> factor .)
+    COMMA           reduce using rule 81 (unaryExpression -> factor .)
+    RBRACKET        reduce using rule 81 (unaryExpression -> factor .)
+    RPAREN          reduce using rule 81 (unaryExpression -> factor .)
+
+
+state 41
+
+    (82) factor -> LBRACKET . expression RBRACKET
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 72
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 42
+
+    (83) factor -> var .
+
+    TIMES           reduce using rule 83 (factor -> var .)
+    DIVIDE          reduce using rule 83 (factor -> var .)
+    MOD             reduce using rule 83 (factor -> var .)
+    GREATER         reduce using rule 83 (factor -> var .)
+    LOWER           reduce using rule 83 (factor -> var .)
+    EQUALS          reduce using rule 83 (factor -> var .)
+    GREATERTHAN     reduce using rule 83 (factor -> var .)
+    LOWERTHAN       reduce using rule 83 (factor -> var .)
+    PLUS            reduce using rule 83 (factor -> var .)
+    MINUS           reduce using rule 83 (factor -> var .)
+    AND             reduce using rule 83 (factor -> var .)
+    OR              reduce using rule 83 (factor -> var .)
+    SEMMICOLON      reduce using rule 83 (factor -> var .)
+    COMMA           reduce using rule 83 (factor -> var .)
+    RBRACKET        reduce using rule 83 (factor -> var .)
+    RPAREN          reduce using rule 83 (factor -> var .)
+
+
+state 43
+
+    (84) factor -> call .
+
+    TIMES           reduce using rule 84 (factor -> call .)
+    DIVIDE          reduce using rule 84 (factor -> call .)
+    MOD             reduce using rule 84 (factor -> call .)
+    GREATER         reduce using rule 84 (factor -> call .)
+    LOWER           reduce using rule 84 (factor -> call .)
+    EQUALS          reduce using rule 84 (factor -> call .)
+    GREATERTHAN     reduce using rule 84 (factor -> call .)
+    LOWERTHAN       reduce using rule 84 (factor -> call .)
+    PLUS            reduce using rule 84 (factor -> call .)
+    MINUS           reduce using rule 84 (factor -> call .)
+    AND             reduce using rule 84 (factor -> call .)
+    OR              reduce using rule 84 (factor -> call .)
+    SEMMICOLON      reduce using rule 84 (factor -> call .)
+    COMMA           reduce using rule 84 (factor -> call .)
+    RBRACKET        reduce using rule 84 (factor -> call .)
+    RPAREN          reduce using rule 84 (factor -> call .)
+
+
+state 44
+
+    (85) factor -> constant .
+
+    TIMES           reduce using rule 85 (factor -> constant .)
+    DIVIDE          reduce using rule 85 (factor -> constant .)
+    MOD             reduce using rule 85 (factor -> constant .)
+    GREATER         reduce using rule 85 (factor -> constant .)
+    LOWER           reduce using rule 85 (factor -> constant .)
+    EQUALS          reduce using rule 85 (factor -> constant .)
+    GREATERTHAN     reduce using rule 85 (factor -> constant .)
+    LOWERTHAN       reduce using rule 85 (factor -> constant .)
+    PLUS            reduce using rule 85 (factor -> constant .)
+    MINUS           reduce using rule 85 (factor -> constant .)
+    AND             reduce using rule 85 (factor -> constant .)
+    OR              reduce using rule 85 (factor -> constant .)
+    SEMMICOLON      reduce using rule 85 (factor -> constant .)
+    COMMA           reduce using rule 85 (factor -> constant .)
+    RBRACKET        reduce using rule 85 (factor -> constant .)
+    RPAREN          reduce using rule 85 (factor -> constant .)
+
+
+state 45
+
+    (56) var -> IDENTIFIER .
+    (57) var -> IDENTIFIER . LBRACKET expression RBRACKET
+    (90) call -> IDENTIFIER . LBRACKET args RBRACKET
+
+    TIMES           reduce using rule 56 (var -> IDENTIFIER .)
+    DIVIDE          reduce using rule 56 (var -> IDENTIFIER .)
+    MOD             reduce using rule 56 (var -> IDENTIFIER .)
+    GREATER         reduce using rule 56 (var -> IDENTIFIER .)
+    LOWER           reduce using rule 56 (var -> IDENTIFIER .)
+    EQUALS          reduce using rule 56 (var -> IDENTIFIER .)
+    GREATERTHAN     reduce using rule 56 (var -> IDENTIFIER .)
+    LOWERTHAN       reduce using rule 56 (var -> IDENTIFIER .)
+    PLUS            reduce using rule 56 (var -> IDENTIFIER .)
+    MINUS           reduce using rule 56 (var -> IDENTIFIER .)
+    AND             reduce using rule 56 (var -> IDENTIFIER .)
+    OR              reduce using rule 56 (var -> IDENTIFIER .)
+    SEMMICOLON      reduce using rule 56 (var -> IDENTIFIER .)
+    COMMA           reduce using rule 56 (var -> IDENTIFIER .)
+    RBRACKET        reduce using rule 56 (var -> IDENTIFIER .)
+    RPAREN          reduce using rule 56 (var -> IDENTIFIER .)
+    LBRACKET        shift and go to state 75
+
+
+state 46
+
+    (86) constant -> INTNUMBER .
+
+    TIMES           reduce using rule 86 (constant -> INTNUMBER .)
+    DIVIDE          reduce using rule 86 (constant -> INTNUMBER .)
+    MOD             reduce using rule 86 (constant -> INTNUMBER .)
+    GREATER         reduce using rule 86 (constant -> INTNUMBER .)
+    LOWER           reduce using rule 86 (constant -> INTNUMBER .)
+    EQUALS          reduce using rule 86 (constant -> INTNUMBER .)
+    GREATERTHAN     reduce using rule 86 (constant -> INTNUMBER .)
+    LOWERTHAN       reduce using rule 86 (constant -> INTNUMBER .)
+    PLUS            reduce using rule 86 (constant -> INTNUMBER .)
+    MINUS           reduce using rule 86 (constant -> INTNUMBER .)
+    AND             reduce using rule 86 (constant -> INTNUMBER .)
+    OR              reduce using rule 86 (constant -> INTNUMBER .)
+    SEMMICOLON      reduce using rule 86 (constant -> INTNUMBER .)
+    COMMA           reduce using rule 86 (constant -> INTNUMBER .)
+    RBRACKET        reduce using rule 86 (constant -> INTNUMBER .)
+    RPAREN          reduce using rule 86 (constant -> INTNUMBER .)
+
+
+state 47
+
+    (87) constant -> FLOATNUMBER .
+
+    TIMES           reduce using rule 87 (constant -> FLOATNUMBER .)
+    DIVIDE          reduce using rule 87 (constant -> FLOATNUMBER .)
+    MOD             reduce using rule 87 (constant -> FLOATNUMBER .)
+    GREATER         reduce using rule 87 (constant -> FLOATNUMBER .)
+    LOWER           reduce using rule 87 (constant -> FLOATNUMBER .)
+    EQUALS          reduce using rule 87 (constant -> FLOATNUMBER .)
+    GREATERTHAN     reduce using rule 87 (constant -> FLOATNUMBER .)
+    LOWERTHAN       reduce using rule 87 (constant -> FLOATNUMBER .)
+    PLUS            reduce using rule 87 (constant -> FLOATNUMBER .)
+    MINUS           reduce using rule 87 (constant -> FLOATNUMBER .)
+    AND             reduce using rule 87 (constant -> FLOATNUMBER .)
+    OR              reduce using rule 87 (constant -> FLOATNUMBER .)
+    SEMMICOLON      reduce using rule 87 (constant -> FLOATNUMBER .)
+    COMMA           reduce using rule 87 (constant -> FLOATNUMBER .)
+    RBRACKET        reduce using rule 87 (constant -> FLOATNUMBER .)
+    RPAREN          reduce using rule 87 (constant -> FLOATNUMBER .)
+
+
+state 48
+
+    (88) constant -> FALSE .
+
+    TIMES           reduce using rule 88 (constant -> FALSE .)
+    DIVIDE          reduce using rule 88 (constant -> FALSE .)
+    MOD             reduce using rule 88 (constant -> FALSE .)
+    GREATER         reduce using rule 88 (constant -> FALSE .)
+    LOWER           reduce using rule 88 (constant -> FALSE .)
+    EQUALS          reduce using rule 88 (constant -> FALSE .)
+    GREATERTHAN     reduce using rule 88 (constant -> FALSE .)
+    LOWERTHAN       reduce using rule 88 (constant -> FALSE .)
+    PLUS            reduce using rule 88 (constant -> FALSE .)
+    MINUS           reduce using rule 88 (constant -> FALSE .)
+    AND             reduce using rule 88 (constant -> FALSE .)
+    OR              reduce using rule 88 (constant -> FALSE .)
+    SEMMICOLON      reduce using rule 88 (constant -> FALSE .)
+    COMMA           reduce using rule 88 (constant -> FALSE .)
+    RBRACKET        reduce using rule 88 (constant -> FALSE .)
+    RPAREN          reduce using rule 88 (constant -> FALSE .)
+
+
+state 49
+
+    (89) constant -> TRUE .
+
+    TIMES           reduce using rule 89 (constant -> TRUE .)
+    DIVIDE          reduce using rule 89 (constant -> TRUE .)
+    MOD             reduce using rule 89 (constant -> TRUE .)
+    GREATER         reduce using rule 89 (constant -> TRUE .)
+    LOWER           reduce using rule 89 (constant -> TRUE .)
+    EQUALS          reduce using rule 89 (constant -> TRUE .)
+    GREATERTHAN     reduce using rule 89 (constant -> TRUE .)
+    LOWERTHAN       reduce using rule 89 (constant -> TRUE .)
+    PLUS            reduce using rule 89 (constant -> TRUE .)
+    MINUS           reduce using rule 89 (constant -> TRUE .)
+    AND             reduce using rule 89 (constant -> TRUE .)
+    OR              reduce using rule 89 (constant -> TRUE .)
+    SEMMICOLON      reduce using rule 89 (constant -> TRUE .)
+    COMMA           reduce using rule 89 (constant -> TRUE .)
+    RBRACKET        reduce using rule 89 (constant -> TRUE .)
+    RPAREN          reduce using rule 89 (constant -> TRUE .)
+
+
+state 50
+
+    (25) paramTypeList -> typeSpecifier paramIdList .
+    (26) paramIdList -> paramIdList . COMMA paramId
+
+    SEMMICOLON      reduce using rule 25 (paramTypeList -> typeSpecifier paramIdList .)
+    RPAREN          reduce using rule 25 (paramTypeList -> typeSpecifier paramIdList .)
+    COMMA           shift and go to state 76
+
+
+state 51
+
+    (27) paramIdList -> paramId .
+
+    COMMA           reduce using rule 27 (paramIdList -> paramId .)
+    SEMMICOLON      reduce using rule 27 (paramIdList -> paramId .)
+    RPAREN          reduce using rule 27 (paramIdList -> paramId .)
+
+
+state 52
+
+    (28) paramId -> IDENTIFIER .
+    (29) paramId -> IDENTIFIER . LBRACKET RBRACKET
+
+    COMMA           reduce using rule 28 (paramId -> IDENTIFIER .)
+    SEMMICOLON      reduce using rule 28 (paramId -> IDENTIFIER .)
+    RPAREN          reduce using rule 28 (paramId -> IDENTIFIER .)
+    LBRACKET        shift and go to state 77
+
+
+state 53
+
+    (20) funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN . statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    statement                      shift and go to state 78
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    expression                     shift and go to state 85
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 54
+
+    (23) paramList -> paramList SEMMICOLON . paramTypeList
+    (25) paramTypeList -> . typeSpecifier paramIdList
+    (15) typeSpecifier -> . INT
+    (16) typeSpecifier -> . FLOAT
+    (17) typeSpecifier -> . CHAR
+    (18) typeSpecifier -> . BOOL
+    (19) typeSpecifier -> . VOID
+
+    INT             shift and go to state 9
+    FLOAT           shift and go to state 10
+    CHAR            shift and go to state 11
+    BOOL            shift and go to state 12
+    VOID            shift and go to state 13
+
+    paramTypeList                  shift and go to state 94
+    typeSpecifier                  shift and go to state 26
+
+state 55
+
+    (14) varDeclId -> IDENTIFIER LBRACKET INTNUMBER RBRACKET .
+
+    ASSIGMENT       reduce using rule 14 (varDeclId -> IDENTIFIER LBRACKET INTNUMBER RBRACKET .)
+    SEMMICOLON      reduce using rule 14 (varDeclId -> IDENTIFIER LBRACKET INTNUMBER RBRACKET .)
+    COMMA           reduce using rule 14 (varDeclId -> IDENTIFIER LBRACKET INTNUMBER RBRACKET .)
+
+
+state 56
+
+    (58) simpleExpression -> simpleExpression OR . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    orExpression                   shift and go to state 95
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 57
+
+    (60) orExpression -> orExpression AND . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    unaryRelExpression             shift and go to state 96
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 58
+
+    (62) unaryRelExpression -> NOT unaryRelExpression .
+
+    AND             reduce using rule 62 (unaryRelExpression -> NOT unaryRelExpression .)
+    OR              reduce using rule 62 (unaryRelExpression -> NOT unaryRelExpression .)
+    SEMMICOLON      reduce using rule 62 (unaryRelExpression -> NOT unaryRelExpression .)
+    COMMA           reduce using rule 62 (unaryRelExpression -> NOT unaryRelExpression .)
+    RBRACKET        reduce using rule 62 (unaryRelExpression -> NOT unaryRelExpression .)
+    RPAREN          reduce using rule 62 (unaryRelExpression -> NOT unaryRelExpression .)
+
+
+state 59
+
+    (64) relExpression -> addExpression relop . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    addExpression                  shift and go to state 97
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 60
+
+    (71) addExpression -> addExpression addop . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    term                           shift and go to state 98
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 61
+
+    (66) relop -> GREATER .
+
+    LBRACKET        reduce using rule 66 (relop -> GREATER .)
+    IDENTIFIER      reduce using rule 66 (relop -> GREATER .)
+    INTNUMBER       reduce using rule 66 (relop -> GREATER .)
+    FLOATNUMBER     reduce using rule 66 (relop -> GREATER .)
+    FALSE           reduce using rule 66 (relop -> GREATER .)
+    TRUE            reduce using rule 66 (relop -> GREATER .)
+
+
+state 62
+
+    (67) relop -> LOWER .
+
+    LBRACKET        reduce using rule 67 (relop -> LOWER .)
+    IDENTIFIER      reduce using rule 67 (relop -> LOWER .)
+    INTNUMBER       reduce using rule 67 (relop -> LOWER .)
+    FLOATNUMBER     reduce using rule 67 (relop -> LOWER .)
+    FALSE           reduce using rule 67 (relop -> LOWER .)
+    TRUE            reduce using rule 67 (relop -> LOWER .)
+
+
+state 63
+
+    (68) relop -> EQUALS .
+
+    LBRACKET        reduce using rule 68 (relop -> EQUALS .)
+    IDENTIFIER      reduce using rule 68 (relop -> EQUALS .)
+    INTNUMBER       reduce using rule 68 (relop -> EQUALS .)
+    FLOATNUMBER     reduce using rule 68 (relop -> EQUALS .)
+    FALSE           reduce using rule 68 (relop -> EQUALS .)
+    TRUE            reduce using rule 68 (relop -> EQUALS .)
+
+
+state 64
+
+    (69) relop -> GREATERTHAN .
+
+    LBRACKET        reduce using rule 69 (relop -> GREATERTHAN .)
+    IDENTIFIER      reduce using rule 69 (relop -> GREATERTHAN .)
+    INTNUMBER       reduce using rule 69 (relop -> GREATERTHAN .)
+    FLOATNUMBER     reduce using rule 69 (relop -> GREATERTHAN .)
+    FALSE           reduce using rule 69 (relop -> GREATERTHAN .)
+    TRUE            reduce using rule 69 (relop -> GREATERTHAN .)
+
+
+state 65
+
+    (70) relop -> LOWERTHAN .
+
+    LBRACKET        reduce using rule 70 (relop -> LOWERTHAN .)
+    IDENTIFIER      reduce using rule 70 (relop -> LOWERTHAN .)
+    INTNUMBER       reduce using rule 70 (relop -> LOWERTHAN .)
+    FLOATNUMBER     reduce using rule 70 (relop -> LOWERTHAN .)
+    FALSE           reduce using rule 70 (relop -> LOWERTHAN .)
+    TRUE            reduce using rule 70 (relop -> LOWERTHAN .)
+
+
+state 66
+
+    (73) addop -> PLUS .
+
+    LBRACKET        reduce using rule 73 (addop -> PLUS .)
+    IDENTIFIER      reduce using rule 73 (addop -> PLUS .)
+    INTNUMBER       reduce using rule 73 (addop -> PLUS .)
+    FLOATNUMBER     reduce using rule 73 (addop -> PLUS .)
+    FALSE           reduce using rule 73 (addop -> PLUS .)
+    TRUE            reduce using rule 73 (addop -> PLUS .)
+
+
+state 67
+
+    (74) addop -> MINUS .
+
+    LBRACKET        reduce using rule 74 (addop -> MINUS .)
+    IDENTIFIER      reduce using rule 74 (addop -> MINUS .)
+    INTNUMBER       reduce using rule 74 (addop -> MINUS .)
+    FLOATNUMBER     reduce using rule 74 (addop -> MINUS .)
+    FALSE           reduce using rule 74 (addop -> MINUS .)
+    TRUE            reduce using rule 74 (addop -> MINUS .)
+
+
+state 68
+
+    (75) term -> term mulop . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    LBRACKET        shift and go to state 41
+    IDENTIFIER      shift and go to state 45
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    unaryExpression                shift and go to state 99
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 69
+
+    (77) mulop -> TIMES .
+
+    LBRACKET        reduce using rule 77 (mulop -> TIMES .)
+    IDENTIFIER      reduce using rule 77 (mulop -> TIMES .)
+    INTNUMBER       reduce using rule 77 (mulop -> TIMES .)
+    FLOATNUMBER     reduce using rule 77 (mulop -> TIMES .)
+    FALSE           reduce using rule 77 (mulop -> TIMES .)
+    TRUE            reduce using rule 77 (mulop -> TIMES .)
+
+
+state 70
+
+    (78) mulop -> DIVIDE .
+
+    LBRACKET        reduce using rule 78 (mulop -> DIVIDE .)
+    IDENTIFIER      reduce using rule 78 (mulop -> DIVIDE .)
+    INTNUMBER       reduce using rule 78 (mulop -> DIVIDE .)
+    FLOATNUMBER     reduce using rule 78 (mulop -> DIVIDE .)
+    FALSE           reduce using rule 78 (mulop -> DIVIDE .)
+    TRUE            reduce using rule 78 (mulop -> DIVIDE .)
+
+
+state 71
+
+    (79) mulop -> MOD .
+
+    LBRACKET        reduce using rule 79 (mulop -> MOD .)
+    IDENTIFIER      reduce using rule 79 (mulop -> MOD .)
+    INTNUMBER       reduce using rule 79 (mulop -> MOD .)
+    FLOATNUMBER     reduce using rule 79 (mulop -> MOD .)
+    FALSE           reduce using rule 79 (mulop -> MOD .)
+    TRUE            reduce using rule 79 (mulop -> MOD .)
+
+
+state 72
+
+    (82) factor -> LBRACKET expression . RBRACKET
+
+    RBRACKET        shift and go to state 100
+
+
+state 73
+
+    (52) expression -> IDENTIFIER . ASSIGMENT expression
+    (53) expression -> IDENTIFIER . PLUS ASSIGMENT expression
+    (54) expression -> IDENTIFIER . MINUS ASSIGMENT expression
+    (56) var -> IDENTIFIER .
+    (57) var -> IDENTIFIER . LBRACKET expression RBRACKET
+    (90) call -> IDENTIFIER . LBRACKET args RBRACKET
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+    ASSIGMENT       shift and go to state 101
+    PLUS            shift and go to state 102
+    MINUS           shift and go to state 103
+    TIMES           reduce using rule 56 (var -> IDENTIFIER .)
+    DIVIDE          reduce using rule 56 (var -> IDENTIFIER .)
+    MOD             reduce using rule 56 (var -> IDENTIFIER .)
+    GREATER         reduce using rule 56 (var -> IDENTIFIER .)
+    LOWER           reduce using rule 56 (var -> IDENTIFIER .)
+    EQUALS          reduce using rule 56 (var -> IDENTIFIER .)
+    GREATERTHAN     reduce using rule 56 (var -> IDENTIFIER .)
+    LOWERTHAN       reduce using rule 56 (var -> IDENTIFIER .)
+    AND             reduce using rule 56 (var -> IDENTIFIER .)
+    OR              reduce using rule 56 (var -> IDENTIFIER .)
+    RBRACKET        reduce using rule 56 (var -> IDENTIFIER .)
+    SEMMICOLON      reduce using rule 56 (var -> IDENTIFIER .)
+    COMMA           reduce using rule 56 (var -> IDENTIFIER .)
+    RPAREN          reduce using rule 56 (var -> IDENTIFIER .)
+    LBRACKET        shift and go to state 75
+
+  ! PLUS            [ reduce using rule 56 (var -> IDENTIFIER .) ]
+  ! MINUS           [ reduce using rule 56 (var -> IDENTIFIER .) ]
+
+
+state 74
+
+    (55) expression -> simpleExpression .
+    (58) simpleExpression -> simpleExpression . OR orExpression
+
+    RBRACKET        reduce using rule 55 (expression -> simpleExpression .)
+    SEMMICOLON      reduce using rule 55 (expression -> simpleExpression .)
+    COMMA           reduce using rule 55 (expression -> simpleExpression .)
+    RPAREN          reduce using rule 55 (expression -> simpleExpression .)
+    OR              shift and go to state 56
+
+
+state 75
+
+    (57) var -> IDENTIFIER LBRACKET . expression RBRACKET
+    (90) call -> IDENTIFIER LBRACKET . args RBRACKET
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (91) args -> . argList
+    (92) args -> . empty
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (93) argList -> . argList COMMA expression
+    (94) argList -> . expression
+    (95) empty -> .
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    RBRACKET        reduce using rule 95 (empty -> .)
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 104
+    args                           shift and go to state 105
+    simpleExpression               shift and go to state 74
+    argList                        shift and go to state 106
+    empty                          shift and go to state 107
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 76
+
+    (26) paramIdList -> paramIdList COMMA . paramId
+    (28) paramId -> . IDENTIFIER
+    (29) paramId -> . IDENTIFIER LBRACKET RBRACKET
+
+    IDENTIFIER      shift and go to state 52
+
+    paramId                        shift and go to state 108
+
+state 77
+
+    (29) paramId -> IDENTIFIER LBRACKET . RBRACKET
+
+    RBRACKET        shift and go to state 109
+
+
+state 78
+
+    (20) funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .
+
+    BLOCKCOMMENT    reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+    INT             reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+    FLOAT           reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+    CHAR            reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+    BOOL            reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+    VOID            reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+    $end            reduce using rule 20 (funDeclaration -> typeSpecifier IDENTIFIER LPAREN params RPAREN statement .)
+
+
+state 79
+
+    (36) statement -> expressionStmt .
+
+    BLOCKCOMMENT    reduce using rule 36 (statement -> expressionStmt .)
+    INT             reduce using rule 36 (statement -> expressionStmt .)
+    FLOAT           reduce using rule 36 (statement -> expressionStmt .)
+    CHAR            reduce using rule 36 (statement -> expressionStmt .)
+    BOOL            reduce using rule 36 (statement -> expressionStmt .)
+    VOID            reduce using rule 36 (statement -> expressionStmt .)
+    $end            reduce using rule 36 (statement -> expressionStmt .)
+    WHILE           reduce using rule 36 (statement -> expressionStmt .)
+    RBRACE          reduce using rule 36 (statement -> expressionStmt .)
+    SEMMICOLON      reduce using rule 36 (statement -> expressionStmt .)
+    LBRACE          reduce using rule 36 (statement -> expressionStmt .)
+    IF              reduce using rule 36 (statement -> expressionStmt .)
+    FOR             reduce using rule 36 (statement -> expressionStmt .)
+    DO              reduce using rule 36 (statement -> expressionStmt .)
+    RETURN          reduce using rule 36 (statement -> expressionStmt .)
+    BREAK           reduce using rule 36 (statement -> expressionStmt .)
+    IDENTIFIER      reduce using rule 36 (statement -> expressionStmt .)
+    NOT             reduce using rule 36 (statement -> expressionStmt .)
+    LBRACKET        reduce using rule 36 (statement -> expressionStmt .)
+    INTNUMBER       reduce using rule 36 (statement -> expressionStmt .)
+    FLOATNUMBER     reduce using rule 36 (statement -> expressionStmt .)
+    FALSE           reduce using rule 36 (statement -> expressionStmt .)
+    TRUE            reduce using rule 36 (statement -> expressionStmt .)
+    ELSE            reduce using rule 36 (statement -> expressionStmt .)
+
+
+state 80
+
+    (37) statement -> compoundStmt .
+
+    BLOCKCOMMENT    reduce using rule 37 (statement -> compoundStmt .)
+    INT             reduce using rule 37 (statement -> compoundStmt .)
+    FLOAT           reduce using rule 37 (statement -> compoundStmt .)
+    CHAR            reduce using rule 37 (statement -> compoundStmt .)
+    BOOL            reduce using rule 37 (statement -> compoundStmt .)
+    VOID            reduce using rule 37 (statement -> compoundStmt .)
+    $end            reduce using rule 37 (statement -> compoundStmt .)
+    WHILE           reduce using rule 37 (statement -> compoundStmt .)
+    RBRACE          reduce using rule 37 (statement -> compoundStmt .)
+    SEMMICOLON      reduce using rule 37 (statement -> compoundStmt .)
+    LBRACE          reduce using rule 37 (statement -> compoundStmt .)
+    IF              reduce using rule 37 (statement -> compoundStmt .)
+    FOR             reduce using rule 37 (statement -> compoundStmt .)
+    DO              reduce using rule 37 (statement -> compoundStmt .)
+    RETURN          reduce using rule 37 (statement -> compoundStmt .)
+    BREAK           reduce using rule 37 (statement -> compoundStmt .)
+    IDENTIFIER      reduce using rule 37 (statement -> compoundStmt .)
+    NOT             reduce using rule 37 (statement -> compoundStmt .)
+    LBRACKET        reduce using rule 37 (statement -> compoundStmt .)
+    INTNUMBER       reduce using rule 37 (statement -> compoundStmt .)
+    FLOATNUMBER     reduce using rule 37 (statement -> compoundStmt .)
+    FALSE           reduce using rule 37 (statement -> compoundStmt .)
+    TRUE            reduce using rule 37 (statement -> compoundStmt .)
+    ELSE            reduce using rule 37 (statement -> compoundStmt .)
+
+
+state 81
+
+    (38) statement -> selectionStmt .
+
+    BLOCKCOMMENT    reduce using rule 38 (statement -> selectionStmt .)
+    INT             reduce using rule 38 (statement -> selectionStmt .)
+    FLOAT           reduce using rule 38 (statement -> selectionStmt .)
+    CHAR            reduce using rule 38 (statement -> selectionStmt .)
+    BOOL            reduce using rule 38 (statement -> selectionStmt .)
+    VOID            reduce using rule 38 (statement -> selectionStmt .)
+    $end            reduce using rule 38 (statement -> selectionStmt .)
+    WHILE           reduce using rule 38 (statement -> selectionStmt .)
+    RBRACE          reduce using rule 38 (statement -> selectionStmt .)
+    SEMMICOLON      reduce using rule 38 (statement -> selectionStmt .)
+    LBRACE          reduce using rule 38 (statement -> selectionStmt .)
+    IF              reduce using rule 38 (statement -> selectionStmt .)
+    FOR             reduce using rule 38 (statement -> selectionStmt .)
+    DO              reduce using rule 38 (statement -> selectionStmt .)
+    RETURN          reduce using rule 38 (statement -> selectionStmt .)
+    BREAK           reduce using rule 38 (statement -> selectionStmt .)
+    IDENTIFIER      reduce using rule 38 (statement -> selectionStmt .)
+    NOT             reduce using rule 38 (statement -> selectionStmt .)
+    LBRACKET        reduce using rule 38 (statement -> selectionStmt .)
+    INTNUMBER       reduce using rule 38 (statement -> selectionStmt .)
+    FLOATNUMBER     reduce using rule 38 (statement -> selectionStmt .)
+    FALSE           reduce using rule 38 (statement -> selectionStmt .)
+    TRUE            reduce using rule 38 (statement -> selectionStmt .)
+    ELSE            reduce using rule 38 (statement -> selectionStmt .)
+
+
+state 82
+
+    (39) statement -> iterationStmt .
+
+    BLOCKCOMMENT    reduce using rule 39 (statement -> iterationStmt .)
+    INT             reduce using rule 39 (statement -> iterationStmt .)
+    FLOAT           reduce using rule 39 (statement -> iterationStmt .)
+    CHAR            reduce using rule 39 (statement -> iterationStmt .)
+    BOOL            reduce using rule 39 (statement -> iterationStmt .)
+    VOID            reduce using rule 39 (statement -> iterationStmt .)
+    $end            reduce using rule 39 (statement -> iterationStmt .)
+    WHILE           reduce using rule 39 (statement -> iterationStmt .)
+    RBRACE          reduce using rule 39 (statement -> iterationStmt .)
+    SEMMICOLON      reduce using rule 39 (statement -> iterationStmt .)
+    LBRACE          reduce using rule 39 (statement -> iterationStmt .)
+    IF              reduce using rule 39 (statement -> iterationStmt .)
+    FOR             reduce using rule 39 (statement -> iterationStmt .)
+    DO              reduce using rule 39 (statement -> iterationStmt .)
+    RETURN          reduce using rule 39 (statement -> iterationStmt .)
+    BREAK           reduce using rule 39 (statement -> iterationStmt .)
+    IDENTIFIER      reduce using rule 39 (statement -> iterationStmt .)
+    NOT             reduce using rule 39 (statement -> iterationStmt .)
+    LBRACKET        reduce using rule 39 (statement -> iterationStmt .)
+    INTNUMBER       reduce using rule 39 (statement -> iterationStmt .)
+    FLOATNUMBER     reduce using rule 39 (statement -> iterationStmt .)
+    FALSE           reduce using rule 39 (statement -> iterationStmt .)
+    TRUE            reduce using rule 39 (statement -> iterationStmt .)
+    ELSE            reduce using rule 39 (statement -> iterationStmt .)
+
+
+state 83
+
+    (40) statement -> returnStmt .
+
+    BLOCKCOMMENT    reduce using rule 40 (statement -> returnStmt .)
+    INT             reduce using rule 40 (statement -> returnStmt .)
+    FLOAT           reduce using rule 40 (statement -> returnStmt .)
+    CHAR            reduce using rule 40 (statement -> returnStmt .)
+    BOOL            reduce using rule 40 (statement -> returnStmt .)
+    VOID            reduce using rule 40 (statement -> returnStmt .)
+    $end            reduce using rule 40 (statement -> returnStmt .)
+    WHILE           reduce using rule 40 (statement -> returnStmt .)
+    RBRACE          reduce using rule 40 (statement -> returnStmt .)
+    SEMMICOLON      reduce using rule 40 (statement -> returnStmt .)
+    LBRACE          reduce using rule 40 (statement -> returnStmt .)
+    IF              reduce using rule 40 (statement -> returnStmt .)
+    FOR             reduce using rule 40 (statement -> returnStmt .)
+    DO              reduce using rule 40 (statement -> returnStmt .)
+    RETURN          reduce using rule 40 (statement -> returnStmt .)
+    BREAK           reduce using rule 40 (statement -> returnStmt .)
+    IDENTIFIER      reduce using rule 40 (statement -> returnStmt .)
+    NOT             reduce using rule 40 (statement -> returnStmt .)
+    LBRACKET        reduce using rule 40 (statement -> returnStmt .)
+    INTNUMBER       reduce using rule 40 (statement -> returnStmt .)
+    FLOATNUMBER     reduce using rule 40 (statement -> returnStmt .)
+    FALSE           reduce using rule 40 (statement -> returnStmt .)
+    TRUE            reduce using rule 40 (statement -> returnStmt .)
+    ELSE            reduce using rule 40 (statement -> returnStmt .)
+
+
+state 84
+
+    (41) statement -> breakStmt .
+
+    BLOCKCOMMENT    reduce using rule 41 (statement -> breakStmt .)
+    INT             reduce using rule 41 (statement -> breakStmt .)
+    FLOAT           reduce using rule 41 (statement -> breakStmt .)
+    CHAR            reduce using rule 41 (statement -> breakStmt .)
+    BOOL            reduce using rule 41 (statement -> breakStmt .)
+    VOID            reduce using rule 41 (statement -> breakStmt .)
+    $end            reduce using rule 41 (statement -> breakStmt .)
+    WHILE           reduce using rule 41 (statement -> breakStmt .)
+    RBRACE          reduce using rule 41 (statement -> breakStmt .)
+    SEMMICOLON      reduce using rule 41 (statement -> breakStmt .)
+    LBRACE          reduce using rule 41 (statement -> breakStmt .)
+    IF              reduce using rule 41 (statement -> breakStmt .)
+    FOR             reduce using rule 41 (statement -> breakStmt .)
+    DO              reduce using rule 41 (statement -> breakStmt .)
+    RETURN          reduce using rule 41 (statement -> breakStmt .)
+    BREAK           reduce using rule 41 (statement -> breakStmt .)
+    IDENTIFIER      reduce using rule 41 (statement -> breakStmt .)
+    NOT             reduce using rule 41 (statement -> breakStmt .)
+    LBRACKET        reduce using rule 41 (statement -> breakStmt .)
+    INTNUMBER       reduce using rule 41 (statement -> breakStmt .)
+    FLOATNUMBER     reduce using rule 41 (statement -> breakStmt .)
+    FALSE           reduce using rule 41 (statement -> breakStmt .)
+    TRUE            reduce using rule 41 (statement -> breakStmt .)
+    ELSE            reduce using rule 41 (statement -> breakStmt .)
+
+
+state 85
+
+    (42) expressionStmt -> expression . SEMMICOLON
+
+    SEMMICOLON      shift and go to state 110
+
+
+state 86
+
+    (43) expressionStmt -> SEMMICOLON .
+
+    BLOCKCOMMENT    reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    INT             reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    FLOAT           reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    CHAR            reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    BOOL            reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    VOID            reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    $end            reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    WHILE           reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    RBRACE          reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    SEMMICOLON      reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    LBRACE          reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    IF              reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    FOR             reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    DO              reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    RETURN          reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    BREAK           reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    IDENTIFIER      reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    NOT             reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    LBRACKET        reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    INTNUMBER       reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    FLOATNUMBER     reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    FALSE           reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    TRUE            reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+    ELSE            reduce using rule 43 (expressionStmt -> SEMMICOLON .)
+
+
+state 87
+
+    (30) compoundStmt -> LBRACE . localDeclarations statementList RBRACE
+    (31) localDeclarations -> . localDeclarations varDeclaration
+    (32) localDeclarations -> . empty
+    (95) empty -> .
+
+    BLOCKCOMMENT    reduce using rule 95 (empty -> .)
+    INT             reduce using rule 95 (empty -> .)
+    FLOAT           reduce using rule 95 (empty -> .)
+    CHAR            reduce using rule 95 (empty -> .)
+    BOOL            reduce using rule 95 (empty -> .)
+    VOID            reduce using rule 95 (empty -> .)
+    RBRACE          reduce using rule 95 (empty -> .)
+    SEMMICOLON      reduce using rule 95 (empty -> .)
+    LBRACE          reduce using rule 95 (empty -> .)
+    IF              reduce using rule 95 (empty -> .)
+    WHILE           reduce using rule 95 (empty -> .)
+    FOR             reduce using rule 95 (empty -> .)
+    DO              reduce using rule 95 (empty -> .)
+    RETURN          reduce using rule 95 (empty -> .)
+    BREAK           reduce using rule 95 (empty -> .)
+    IDENTIFIER      reduce using rule 95 (empty -> .)
+    NOT             reduce using rule 95 (empty -> .)
+    LBRACKET        reduce using rule 95 (empty -> .)
+    INTNUMBER       reduce using rule 95 (empty -> .)
+    FLOATNUMBER     reduce using rule 95 (empty -> .)
+    FALSE           reduce using rule 95 (empty -> .)
+    TRUE            reduce using rule 95 (empty -> .)
+
+    localDeclarations              shift and go to state 111
+    empty                          shift and go to state 112
+
+state 88
+
+    (44) selectionStmt -> IF . LPAREN expression RPAREN statement
+    (45) selectionStmt -> IF . LPAREN expression RPAREN statement ELSE statement
+
+    LPAREN          shift and go to state 113
+
+
+state 89
+
+    (46) iterationStmt -> WHILE . LPAREN expression RPAREN statement
+
+    LPAREN          shift and go to state 114
+
+
+state 90
+
+    (47) iterationStmt -> FOR . LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+
+    LPAREN          shift and go to state 115
+
+
+state 91
+
+    (48) iterationStmt -> DO . statement WHILE LPAREN expression RPAREN statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    statement                      shift and go to state 116
+    expression                     shift and go to state 85
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 92
+
+    (49) returnStmt -> RETURN . SEMMICOLON
+    (50) returnStmt -> RETURN . expression SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 117
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 118
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 93
+
+    (51) breakStmt -> BREAK . SEMMICOLON
+
+    SEMMICOLON      shift and go to state 119
+
+
+state 94
+
+    (23) paramList -> paramList SEMMICOLON paramTypeList .
+
+    SEMMICOLON      reduce using rule 23 (paramList -> paramList SEMMICOLON paramTypeList .)
+    RPAREN          reduce using rule 23 (paramList -> paramList SEMMICOLON paramTypeList .)
+
+
+state 95
+
+    (58) simpleExpression -> simpleExpression OR orExpression .
+    (60) orExpression -> orExpression . AND unaryRelExpression
+
+    OR              reduce using rule 58 (simpleExpression -> simpleExpression OR orExpression .)
+    SEMMICOLON      reduce using rule 58 (simpleExpression -> simpleExpression OR orExpression .)
+    COMMA           reduce using rule 58 (simpleExpression -> simpleExpression OR orExpression .)
+    RBRACKET        reduce using rule 58 (simpleExpression -> simpleExpression OR orExpression .)
+    RPAREN          reduce using rule 58 (simpleExpression -> simpleExpression OR orExpression .)
+    AND             shift and go to state 57
+
+
+state 96
+
+    (60) orExpression -> orExpression AND unaryRelExpression .
+
+    AND             reduce using rule 60 (orExpression -> orExpression AND unaryRelExpression .)
+    OR              reduce using rule 60 (orExpression -> orExpression AND unaryRelExpression .)
+    SEMMICOLON      reduce using rule 60 (orExpression -> orExpression AND unaryRelExpression .)
+    COMMA           reduce using rule 60 (orExpression -> orExpression AND unaryRelExpression .)
+    RBRACKET        reduce using rule 60 (orExpression -> orExpression AND unaryRelExpression .)
+    RPAREN          reduce using rule 60 (orExpression -> orExpression AND unaryRelExpression .)
+
+
+state 97
+
+    (64) relExpression -> addExpression relop addExpression .
+    (71) addExpression -> addExpression . addop term
+    (73) addop -> . PLUS
+    (74) addop -> . MINUS
+
+    AND             reduce using rule 64 (relExpression -> addExpression relop addExpression .)
+    OR              reduce using rule 64 (relExpression -> addExpression relop addExpression .)
+    SEMMICOLON      reduce using rule 64 (relExpression -> addExpression relop addExpression .)
+    COMMA           reduce using rule 64 (relExpression -> addExpression relop addExpression .)
+    RBRACKET        reduce using rule 64 (relExpression -> addExpression relop addExpression .)
+    RPAREN          reduce using rule 64 (relExpression -> addExpression relop addExpression .)
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+
+    addop                          shift and go to state 60
+
+state 98
+
+    (71) addExpression -> addExpression addop term .
+    (75) term -> term . mulop unaryExpression
+    (77) mulop -> . TIMES
+    (78) mulop -> . DIVIDE
+    (79) mulop -> . MOD
+
+    GREATER         reduce using rule 71 (addExpression -> addExpression addop term .)
+    LOWER           reduce using rule 71 (addExpression -> addExpression addop term .)
+    EQUALS          reduce using rule 71 (addExpression -> addExpression addop term .)
+    GREATERTHAN     reduce using rule 71 (addExpression -> addExpression addop term .)
+    LOWERTHAN       reduce using rule 71 (addExpression -> addExpression addop term .)
+    PLUS            reduce using rule 71 (addExpression -> addExpression addop term .)
+    MINUS           reduce using rule 71 (addExpression -> addExpression addop term .)
+    AND             reduce using rule 71 (addExpression -> addExpression addop term .)
+    OR              reduce using rule 71 (addExpression -> addExpression addop term .)
+    SEMMICOLON      reduce using rule 71 (addExpression -> addExpression addop term .)
+    COMMA           reduce using rule 71 (addExpression -> addExpression addop term .)
+    RBRACKET        reduce using rule 71 (addExpression -> addExpression addop term .)
+    RPAREN          reduce using rule 71 (addExpression -> addExpression addop term .)
+    TIMES           shift and go to state 69
+    DIVIDE          shift and go to state 70
+    MOD             shift and go to state 71
+
+    mulop                          shift and go to state 68
+
+state 99
+
+    (75) term -> term mulop unaryExpression .
+    (80) unaryExpression -> unaryExpression .
+
+  ! reduce/reduce conflict for TIMES resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for DIVIDE resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for MOD resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for GREATER resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for LOWER resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for GREATERTHAN resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for LOWERTHAN resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for PLUS resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for MINUS resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for AND resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for OR resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for SEMMICOLON resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for COMMA resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for RBRACKET resolved using rule 75 (term -> term mulop unaryExpression .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 75 (term -> term mulop unaryExpression .)
+    TIMES           reduce using rule 75 (term -> term mulop unaryExpression .)
+    DIVIDE          reduce using rule 75 (term -> term mulop unaryExpression .)
+    MOD             reduce using rule 75 (term -> term mulop unaryExpression .)
+    GREATER         reduce using rule 75 (term -> term mulop unaryExpression .)
+    LOWER           reduce using rule 75 (term -> term mulop unaryExpression .)
+    EQUALS          reduce using rule 75 (term -> term mulop unaryExpression .)
+    GREATERTHAN     reduce using rule 75 (term -> term mulop unaryExpression .)
+    LOWERTHAN       reduce using rule 75 (term -> term mulop unaryExpression .)
+    PLUS            reduce using rule 75 (term -> term mulop unaryExpression .)
+    MINUS           reduce using rule 75 (term -> term mulop unaryExpression .)
+    AND             reduce using rule 75 (term -> term mulop unaryExpression .)
+    OR              reduce using rule 75 (term -> term mulop unaryExpression .)
+    SEMMICOLON      reduce using rule 75 (term -> term mulop unaryExpression .)
+    COMMA           reduce using rule 75 (term -> term mulop unaryExpression .)
+    RBRACKET        reduce using rule 75 (term -> term mulop unaryExpression .)
+    RPAREN          reduce using rule 75 (term -> term mulop unaryExpression .)
+
+  ! TIMES           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! DIVIDE          [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! MOD             [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! GREATER         [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! LOWER           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! EQUALS          [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! GREATERTHAN     [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! LOWERTHAN       [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! PLUS            [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! MINUS           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! AND             [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! OR              [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! SEMMICOLON      [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! COMMA           [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! RBRACKET        [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+  ! RPAREN          [ reduce using rule 80 (unaryExpression -> unaryExpression .) ]
+
+
+state 100
+
+    (82) factor -> LBRACKET expression RBRACKET .
+
+    TIMES           reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    DIVIDE          reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    MOD             reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    GREATER         reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    LOWER           reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    EQUALS          reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    GREATERTHAN     reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    LOWERTHAN       reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    PLUS            reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    MINUS           reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    AND             reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    OR              reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    SEMMICOLON      reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    COMMA           reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    RBRACKET        reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+    RPAREN          reduce using rule 82 (factor -> LBRACKET expression RBRACKET .)
+
+
+state 101
+
+    (52) expression -> IDENTIFIER ASSIGMENT . expression
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 120
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 102
+
+    (53) expression -> IDENTIFIER PLUS . ASSIGMENT expression
+
+    ASSIGMENT       shift and go to state 121
+
+
+state 103
+
+    (54) expression -> IDENTIFIER MINUS . ASSIGMENT expression
+
+    ASSIGMENT       shift and go to state 122
+
+
+state 104
+
+    (57) var -> IDENTIFIER LBRACKET expression . RBRACKET
+    (94) argList -> expression .
+
+  ! shift/reduce conflict for RBRACKET resolved as shift
+    RBRACKET        shift and go to state 123
+    COMMA           reduce using rule 94 (argList -> expression .)
+
+  ! RBRACKET        [ reduce using rule 94 (argList -> expression .) ]
+
+
+state 105
+
+    (90) call -> IDENTIFIER LBRACKET args . RBRACKET
+
+    RBRACKET        shift and go to state 124
+
+
+state 106
+
+    (91) args -> argList .
+    (93) argList -> argList . COMMA expression
+
+    RBRACKET        reduce using rule 91 (args -> argList .)
+    COMMA           shift and go to state 125
+
+
+state 107
+
+    (92) args -> empty .
+
+    RBRACKET        reduce using rule 92 (args -> empty .)
+
+
+state 108
+
+    (26) paramIdList -> paramIdList COMMA paramId .
+
+    COMMA           reduce using rule 26 (paramIdList -> paramIdList COMMA paramId .)
+    SEMMICOLON      reduce using rule 26 (paramIdList -> paramIdList COMMA paramId .)
+    RPAREN          reduce using rule 26 (paramIdList -> paramIdList COMMA paramId .)
+
+
+state 109
+
+    (29) paramId -> IDENTIFIER LBRACKET RBRACKET .
+
+    COMMA           reduce using rule 29 (paramId -> IDENTIFIER LBRACKET RBRACKET .)
+    SEMMICOLON      reduce using rule 29 (paramId -> IDENTIFIER LBRACKET RBRACKET .)
+    RPAREN          reduce using rule 29 (paramId -> IDENTIFIER LBRACKET RBRACKET .)
+
+
+state 110
+
+    (42) expressionStmt -> expression SEMMICOLON .
+
+    BLOCKCOMMENT    reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    INT             reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    FLOAT           reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    CHAR            reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    BOOL            reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    VOID            reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    $end            reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    WHILE           reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    RBRACE          reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    SEMMICOLON      reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    LBRACE          reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    IF              reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    FOR             reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    DO              reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    RETURN          reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    BREAK           reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    IDENTIFIER      reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    NOT             reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    LBRACKET        reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    INTNUMBER       reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    FLOATNUMBER     reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    FALSE           reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    TRUE            reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+    ELSE            reduce using rule 42 (expressionStmt -> expression SEMMICOLON .)
+
+
+state 111
+
+    (30) compoundStmt -> LBRACE localDeclarations . statementList RBRACE
+    (31) localDeclarations -> localDeclarations . varDeclaration
+    (33) statementList -> . statementList statement
+    (34) statementList -> . empty
+    (35) statementList -> . comment
+    (8) varDeclaration -> . typeSpecifier varDeclList SEMMICOLON
+    (95) empty -> .
+    (7) comment -> . BLOCKCOMMENT
+    (15) typeSpecifier -> . INT
+    (16) typeSpecifier -> . FLOAT
+    (17) typeSpecifier -> . CHAR
+    (18) typeSpecifier -> . BOOL
+    (19) typeSpecifier -> . VOID
+
+    RBRACE          reduce using rule 95 (empty -> .)
+    SEMMICOLON      reduce using rule 95 (empty -> .)
+    LBRACE          reduce using rule 95 (empty -> .)
+    IF              reduce using rule 95 (empty -> .)
+    WHILE           reduce using rule 95 (empty -> .)
+    FOR             reduce using rule 95 (empty -> .)
+    DO              reduce using rule 95 (empty -> .)
+    RETURN          reduce using rule 95 (empty -> .)
+    BREAK           reduce using rule 95 (empty -> .)
+    IDENTIFIER      reduce using rule 95 (empty -> .)
+    NOT             reduce using rule 95 (empty -> .)
+    LBRACKET        reduce using rule 95 (empty -> .)
+    INTNUMBER       reduce using rule 95 (empty -> .)
+    FLOATNUMBER     reduce using rule 95 (empty -> .)
+    FALSE           reduce using rule 95 (empty -> .)
+    TRUE            reduce using rule 95 (empty -> .)
+    BLOCKCOMMENT    shift and go to state 8
+    INT             shift and go to state 9
+    FLOAT           shift and go to state 10
+    CHAR            shift and go to state 11
+    BOOL            shift and go to state 12
+    VOID            shift and go to state 13
+
+    statementList                  shift and go to state 126
+    varDeclaration                 shift and go to state 127
+    empty                          shift and go to state 128
+    comment                        shift and go to state 129
+    typeSpecifier                  shift and go to state 130
+
+state 112
+
+    (32) localDeclarations -> empty .
+
+    BLOCKCOMMENT    reduce using rule 32 (localDeclarations -> empty .)
+    INT             reduce using rule 32 (localDeclarations -> empty .)
+    FLOAT           reduce using rule 32 (localDeclarations -> empty .)
+    CHAR            reduce using rule 32 (localDeclarations -> empty .)
+    BOOL            reduce using rule 32 (localDeclarations -> empty .)
+    VOID            reduce using rule 32 (localDeclarations -> empty .)
+    RBRACE          reduce using rule 32 (localDeclarations -> empty .)
+    SEMMICOLON      reduce using rule 32 (localDeclarations -> empty .)
+    LBRACE          reduce using rule 32 (localDeclarations -> empty .)
+    IF              reduce using rule 32 (localDeclarations -> empty .)
+    WHILE           reduce using rule 32 (localDeclarations -> empty .)
+    FOR             reduce using rule 32 (localDeclarations -> empty .)
+    DO              reduce using rule 32 (localDeclarations -> empty .)
+    RETURN          reduce using rule 32 (localDeclarations -> empty .)
+    BREAK           reduce using rule 32 (localDeclarations -> empty .)
+    IDENTIFIER      reduce using rule 32 (localDeclarations -> empty .)
+    NOT             reduce using rule 32 (localDeclarations -> empty .)
+    LBRACKET        reduce using rule 32 (localDeclarations -> empty .)
+    INTNUMBER       reduce using rule 32 (localDeclarations -> empty .)
+    FLOATNUMBER     reduce using rule 32 (localDeclarations -> empty .)
+    FALSE           reduce using rule 32 (localDeclarations -> empty .)
+    TRUE            reduce using rule 32 (localDeclarations -> empty .)
+
+
+state 113
+
+    (44) selectionStmt -> IF LPAREN . expression RPAREN statement
+    (45) selectionStmt -> IF LPAREN . expression RPAREN statement ELSE statement
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 131
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 114
+
+    (46) iterationStmt -> WHILE LPAREN . expression RPAREN statement
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 132
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 115
+
+    (47) iterationStmt -> FOR LPAREN . IDENTIFIER IN IDENTIFIER RPAREN statement
+
+    IDENTIFIER      shift and go to state 133
+
+
+state 116
+
+    (48) iterationStmt -> DO statement . WHILE LPAREN expression RPAREN statement
+
+    WHILE           shift and go to state 134
+
+
+state 117
+
+    (49) returnStmt -> RETURN SEMMICOLON .
+
+    BLOCKCOMMENT    reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    INT             reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    FLOAT           reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    CHAR            reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    BOOL            reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    VOID            reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    $end            reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    WHILE           reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    RBRACE          reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    SEMMICOLON      reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    LBRACE          reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    IF              reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    FOR             reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    DO              reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    RETURN          reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    BREAK           reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    IDENTIFIER      reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    NOT             reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    LBRACKET        reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    INTNUMBER       reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    FLOATNUMBER     reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    FALSE           reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    TRUE            reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+    ELSE            reduce using rule 49 (returnStmt -> RETURN SEMMICOLON .)
+
+
+state 118
+
+    (50) returnStmt -> RETURN expression . SEMMICOLON
+
+    SEMMICOLON      shift and go to state 135
+
+
+state 119
+
+    (51) breakStmt -> BREAK SEMMICOLON .
+
+    BLOCKCOMMENT    reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    INT             reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    FLOAT           reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    CHAR            reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    BOOL            reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    VOID            reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    $end            reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    WHILE           reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    RBRACE          reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    SEMMICOLON      reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    LBRACE          reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    IF              reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    FOR             reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    DO              reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    RETURN          reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    BREAK           reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    IDENTIFIER      reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    NOT             reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    LBRACKET        reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    INTNUMBER       reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    FLOATNUMBER     reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    FALSE           reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    TRUE            reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+    ELSE            reduce using rule 51 (breakStmt -> BREAK SEMMICOLON .)
+
+
+state 120
+
+    (52) expression -> IDENTIFIER ASSIGMENT expression .
+
+    RBRACKET        reduce using rule 52 (expression -> IDENTIFIER ASSIGMENT expression .)
+    SEMMICOLON      reduce using rule 52 (expression -> IDENTIFIER ASSIGMENT expression .)
+    COMMA           reduce using rule 52 (expression -> IDENTIFIER ASSIGMENT expression .)
+    RPAREN          reduce using rule 52 (expression -> IDENTIFIER ASSIGMENT expression .)
+
+
+state 121
+
+    (53) expression -> IDENTIFIER PLUS ASSIGMENT . expression
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 136
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 122
+
+    (54) expression -> IDENTIFIER MINUS ASSIGMENT . expression
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 137
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 123
+
+    (57) var -> IDENTIFIER LBRACKET expression RBRACKET .
+
+    TIMES           reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    DIVIDE          reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    MOD             reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    GREATER         reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    LOWER           reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    EQUALS          reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    GREATERTHAN     reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    LOWERTHAN       reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    PLUS            reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    MINUS           reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    AND             reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    OR              reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    SEMMICOLON      reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    COMMA           reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    RBRACKET        reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+    RPAREN          reduce using rule 57 (var -> IDENTIFIER LBRACKET expression RBRACKET .)
+
+
+state 124
+
+    (90) call -> IDENTIFIER LBRACKET args RBRACKET .
+
+    TIMES           reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    DIVIDE          reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    MOD             reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    GREATER         reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    LOWER           reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    EQUALS          reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    GREATERTHAN     reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    LOWERTHAN       reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    PLUS            reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    MINUS           reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    AND             reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    OR              reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    SEMMICOLON      reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    COMMA           reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    RBRACKET        reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+    RPAREN          reduce using rule 90 (call -> IDENTIFIER LBRACKET args RBRACKET .)
+
+
+state 125
+
+    (93) argList -> argList COMMA . expression
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 138
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 126
+
+    (30) compoundStmt -> LBRACE localDeclarations statementList . RBRACE
+    (33) statementList -> statementList . statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    RBRACE          shift and go to state 139
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    statement                      shift and go to state 140
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    expression                     shift and go to state 85
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 127
+
+    (31) localDeclarations -> localDeclarations varDeclaration .
+
+    BLOCKCOMMENT    reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    INT             reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    FLOAT           reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    CHAR            reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    BOOL            reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    VOID            reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    RBRACE          reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    SEMMICOLON      reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    LBRACE          reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    IF              reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    WHILE           reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    FOR             reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    DO              reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    RETURN          reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    BREAK           reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    IDENTIFIER      reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    NOT             reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    LBRACKET        reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    INTNUMBER       reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    FLOATNUMBER     reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    FALSE           reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+    TRUE            reduce using rule 31 (localDeclarations -> localDeclarations varDeclaration .)
+
+
+state 128
+
+    (34) statementList -> empty .
+
+    RBRACE          reduce using rule 34 (statementList -> empty .)
+    SEMMICOLON      reduce using rule 34 (statementList -> empty .)
+    LBRACE          reduce using rule 34 (statementList -> empty .)
+    IF              reduce using rule 34 (statementList -> empty .)
+    WHILE           reduce using rule 34 (statementList -> empty .)
+    FOR             reduce using rule 34 (statementList -> empty .)
+    DO              reduce using rule 34 (statementList -> empty .)
+    RETURN          reduce using rule 34 (statementList -> empty .)
+    BREAK           reduce using rule 34 (statementList -> empty .)
+    IDENTIFIER      reduce using rule 34 (statementList -> empty .)
+    NOT             reduce using rule 34 (statementList -> empty .)
+    LBRACKET        reduce using rule 34 (statementList -> empty .)
+    INTNUMBER       reduce using rule 34 (statementList -> empty .)
+    FLOATNUMBER     reduce using rule 34 (statementList -> empty .)
+    FALSE           reduce using rule 34 (statementList -> empty .)
+    TRUE            reduce using rule 34 (statementList -> empty .)
+
+
+state 129
+
+    (35) statementList -> comment .
+
+    RBRACE          reduce using rule 35 (statementList -> comment .)
+    SEMMICOLON      reduce using rule 35 (statementList -> comment .)
+    LBRACE          reduce using rule 35 (statementList -> comment .)
+    IF              reduce using rule 35 (statementList -> comment .)
+    WHILE           reduce using rule 35 (statementList -> comment .)
+    FOR             reduce using rule 35 (statementList -> comment .)
+    DO              reduce using rule 35 (statementList -> comment .)
+    RETURN          reduce using rule 35 (statementList -> comment .)
+    BREAK           reduce using rule 35 (statementList -> comment .)
+    IDENTIFIER      reduce using rule 35 (statementList -> comment .)
+    NOT             reduce using rule 35 (statementList -> comment .)
+    LBRACKET        reduce using rule 35 (statementList -> comment .)
+    INTNUMBER       reduce using rule 35 (statementList -> comment .)
+    FLOATNUMBER     reduce using rule 35 (statementList -> comment .)
+    FALSE           reduce using rule 35 (statementList -> comment .)
+    TRUE            reduce using rule 35 (statementList -> comment .)
+
+
+state 130
+
+    (8) varDeclaration -> typeSpecifier . varDeclList SEMMICOLON
+    (9) varDeclList -> . varDeclList COMMA varDecInitialize
+    (10) varDeclList -> . varDecInitialize
+    (11) varDecInitialize -> . varDeclId
+    (12) varDecInitialize -> . varDeclId ASSIGMENT simpleExpression
+    (13) varDeclId -> . IDENTIFIER
+    (14) varDeclId -> . IDENTIFIER LBRACKET INTNUMBER RBRACKET
+
+    IDENTIFIER      shift and go to state 25
+
+    varDeclList                    shift and go to state 15
+    varDecInitialize               shift and go to state 17
+    varDeclId                      shift and go to state 18
+
+state 131
+
+    (44) selectionStmt -> IF LPAREN expression . RPAREN statement
+    (45) selectionStmt -> IF LPAREN expression . RPAREN statement ELSE statement
+
+    RPAREN          shift and go to state 141
+
+
+state 132
+
+    (46) iterationStmt -> WHILE LPAREN expression . RPAREN statement
+
+    RPAREN          shift and go to state 142
+
+
+state 133
+
+    (47) iterationStmt -> FOR LPAREN IDENTIFIER . IN IDENTIFIER RPAREN statement
+
+    IN              shift and go to state 143
+
+
+state 134
+
+    (48) iterationStmt -> DO statement WHILE . LPAREN expression RPAREN statement
+
+    LPAREN          shift and go to state 144
+
+
+state 135
+
+    (50) returnStmt -> RETURN expression SEMMICOLON .
+
+    BLOCKCOMMENT    reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    INT             reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    FLOAT           reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    CHAR            reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    BOOL            reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    VOID            reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    $end            reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    WHILE           reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    RBRACE          reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    SEMMICOLON      reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    LBRACE          reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    IF              reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    FOR             reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    DO              reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    RETURN          reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    BREAK           reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    IDENTIFIER      reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    NOT             reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    LBRACKET        reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    INTNUMBER       reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    FLOATNUMBER     reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    FALSE           reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    TRUE            reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+    ELSE            reduce using rule 50 (returnStmt -> RETURN expression SEMMICOLON .)
+
+
+state 136
+
+    (53) expression -> IDENTIFIER PLUS ASSIGMENT expression .
+
+    RBRACKET        reduce using rule 53 (expression -> IDENTIFIER PLUS ASSIGMENT expression .)
+    SEMMICOLON      reduce using rule 53 (expression -> IDENTIFIER PLUS ASSIGMENT expression .)
+    COMMA           reduce using rule 53 (expression -> IDENTIFIER PLUS ASSIGMENT expression .)
+    RPAREN          reduce using rule 53 (expression -> IDENTIFIER PLUS ASSIGMENT expression .)
+
+
+state 137
+
+    (54) expression -> IDENTIFIER MINUS ASSIGMENT expression .
+
+    RBRACKET        reduce using rule 54 (expression -> IDENTIFIER MINUS ASSIGMENT expression .)
+    SEMMICOLON      reduce using rule 54 (expression -> IDENTIFIER MINUS ASSIGMENT expression .)
+    COMMA           reduce using rule 54 (expression -> IDENTIFIER MINUS ASSIGMENT expression .)
+    RPAREN          reduce using rule 54 (expression -> IDENTIFIER MINUS ASSIGMENT expression .)
+
+
+state 138
+
+    (93) argList -> argList COMMA expression .
+
+    COMMA           reduce using rule 93 (argList -> argList COMMA expression .)
+    RBRACKET        reduce using rule 93 (argList -> argList COMMA expression .)
+
+
+state 139
+
+    (30) compoundStmt -> LBRACE localDeclarations statementList RBRACE .
+
+    BLOCKCOMMENT    reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    INT             reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    FLOAT           reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    CHAR            reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    BOOL            reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    VOID            reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    $end            reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    WHILE           reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    RBRACE          reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    SEMMICOLON      reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    LBRACE          reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    IF              reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    FOR             reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    DO              reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    RETURN          reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    BREAK           reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    IDENTIFIER      reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    NOT             reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    LBRACKET        reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    INTNUMBER       reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    FLOATNUMBER     reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    FALSE           reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    TRUE            reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+    ELSE            reduce using rule 30 (compoundStmt -> LBRACE localDeclarations statementList RBRACE .)
+
+
+state 140
+
+    (33) statementList -> statementList statement .
+
+    RBRACE          reduce using rule 33 (statementList -> statementList statement .)
+    SEMMICOLON      reduce using rule 33 (statementList -> statementList statement .)
+    LBRACE          reduce using rule 33 (statementList -> statementList statement .)
+    IF              reduce using rule 33 (statementList -> statementList statement .)
+    WHILE           reduce using rule 33 (statementList -> statementList statement .)
+    FOR             reduce using rule 33 (statementList -> statementList statement .)
+    DO              reduce using rule 33 (statementList -> statementList statement .)
+    RETURN          reduce using rule 33 (statementList -> statementList statement .)
+    BREAK           reduce using rule 33 (statementList -> statementList statement .)
+    IDENTIFIER      reduce using rule 33 (statementList -> statementList statement .)
+    NOT             reduce using rule 33 (statementList -> statementList statement .)
+    LBRACKET        reduce using rule 33 (statementList -> statementList statement .)
+    INTNUMBER       reduce using rule 33 (statementList -> statementList statement .)
+    FLOATNUMBER     reduce using rule 33 (statementList -> statementList statement .)
+    FALSE           reduce using rule 33 (statementList -> statementList statement .)
+    TRUE            reduce using rule 33 (statementList -> statementList statement .)
+
+
+state 141
+
+    (44) selectionStmt -> IF LPAREN expression RPAREN . statement
+    (45) selectionStmt -> IF LPAREN expression RPAREN . statement ELSE statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 85
+    statement                      shift and go to state 145
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 142
+
+    (46) iterationStmt -> WHILE LPAREN expression RPAREN . statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 85
+    statement                      shift and go to state 146
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 143
+
+    (47) iterationStmt -> FOR LPAREN IDENTIFIER IN . IDENTIFIER RPAREN statement
+
+    IDENTIFIER      shift and go to state 147
+
+
+state 144
+
+    (48) iterationStmt -> DO statement WHILE LPAREN . expression RPAREN statement
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 148
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 145
+
+    (44) selectionStmt -> IF LPAREN expression RPAREN statement .
+    (45) selectionStmt -> IF LPAREN expression RPAREN statement . ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    BLOCKCOMMENT    reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    INT             reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    CHAR            reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    BOOL            reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    VOID            reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    $end            reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    RBRACE          reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    SEMMICOLON      reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    IF              reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    DO              reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    RETURN          reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    BREAK           reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    IDENTIFIER      reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    NOT             reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    LBRACKET        reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    INTNUMBER       reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    FLOATNUMBER     reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    FALSE           reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    TRUE            reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .)
+    ELSE            shift and go to state 149
+
+  ! ELSE            [ reduce using rule 44 (selectionStmt -> IF LPAREN expression RPAREN statement .) ]
+
+
+state 146
+
+    (46) iterationStmt -> WHILE LPAREN expression RPAREN statement .
+
+    BLOCKCOMMENT    reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    INT             reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    CHAR            reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    BOOL            reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    VOID            reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    $end            reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    RBRACE          reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    SEMMICOLON      reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    IF              reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    DO              reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    RETURN          reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    BREAK           reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    IDENTIFIER      reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    NOT             reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    LBRACKET        reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    INTNUMBER       reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    FLOATNUMBER     reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    FALSE           reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    TRUE            reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+    ELSE            reduce using rule 46 (iterationStmt -> WHILE LPAREN expression RPAREN statement .)
+
+
+state 147
+
+    (47) iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER . RPAREN statement
+
+    RPAREN          shift and go to state 150
+
+
+state 148
+
+    (48) iterationStmt -> DO statement WHILE LPAREN expression . RPAREN statement
+
+    RPAREN          shift and go to state 151
+
+
+state 149
+
+    (45) selectionStmt -> IF LPAREN expression RPAREN statement ELSE . statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    expression                     shift and go to state 85
+    statement                      shift and go to state 152
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 150
+
+    (47) iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN . statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    statement                      shift and go to state 153
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    expression                     shift and go to state 85
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 151
+
+    (48) iterationStmt -> DO statement WHILE LPAREN expression RPAREN . statement
+    (36) statement -> . expressionStmt
+    (37) statement -> . compoundStmt
+    (38) statement -> . selectionStmt
+    (39) statement -> . iterationStmt
+    (40) statement -> . returnStmt
+    (41) statement -> . breakStmt
+    (42) expressionStmt -> . expression SEMMICOLON
+    (43) expressionStmt -> . SEMMICOLON
+    (30) compoundStmt -> . LBRACE localDeclarations statementList RBRACE
+    (44) selectionStmt -> . IF LPAREN expression RPAREN statement
+    (45) selectionStmt -> . IF LPAREN expression RPAREN statement ELSE statement
+    (46) iterationStmt -> . WHILE LPAREN expression RPAREN statement
+    (47) iterationStmt -> . FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement
+    (48) iterationStmt -> . DO statement WHILE LPAREN expression RPAREN statement
+    (49) returnStmt -> . RETURN SEMMICOLON
+    (50) returnStmt -> . RETURN expression SEMMICOLON
+    (51) breakStmt -> . BREAK SEMMICOLON
+    (52) expression -> . IDENTIFIER ASSIGMENT expression
+    (53) expression -> . IDENTIFIER PLUS ASSIGMENT expression
+    (54) expression -> . IDENTIFIER MINUS ASSIGMENT expression
+    (55) expression -> . simpleExpression
+    (58) simpleExpression -> . simpleExpression OR orExpression
+    (59) simpleExpression -> . orExpression
+    (60) orExpression -> . orExpression AND unaryRelExpression
+    (61) orExpression -> . unaryRelExpression
+    (62) unaryRelExpression -> . NOT unaryRelExpression
+    (63) unaryRelExpression -> . relExpression
+    (64) relExpression -> . addExpression relop addExpression
+    (65) relExpression -> . addExpression
+    (71) addExpression -> . addExpression addop term
+    (72) addExpression -> . term
+    (75) term -> . term mulop unaryExpression
+    (76) term -> . unaryExpression
+    (80) unaryExpression -> . unaryExpression
+    (81) unaryExpression -> . factor
+    (82) factor -> . LBRACKET expression RBRACKET
+    (83) factor -> . var
+    (84) factor -> . call
+    (85) factor -> . constant
+    (56) var -> . IDENTIFIER
+    (57) var -> . IDENTIFIER LBRACKET expression RBRACKET
+    (90) call -> . IDENTIFIER LBRACKET args RBRACKET
+    (86) constant -> . INTNUMBER
+    (87) constant -> . FLOATNUMBER
+    (88) constant -> . FALSE
+    (89) constant -> . TRUE
+
+    SEMMICOLON      shift and go to state 86
+    LBRACE          shift and go to state 87
+    IF              shift and go to state 88
+    WHILE           shift and go to state 89
+    FOR             shift and go to state 90
+    DO              shift and go to state 91
+    RETURN          shift and go to state 92
+    BREAK           shift and go to state 93
+    IDENTIFIER      shift and go to state 73
+    NOT             shift and go to state 35
+    LBRACKET        shift and go to state 41
+    INTNUMBER       shift and go to state 46
+    FLOATNUMBER     shift and go to state 47
+    FALSE           shift and go to state 48
+    TRUE            shift and go to state 49
+
+    statement                      shift and go to state 154
+    expression                     shift and go to state 85
+    expressionStmt                 shift and go to state 79
+    compoundStmt                   shift and go to state 80
+    selectionStmt                  shift and go to state 81
+    iterationStmt                  shift and go to state 82
+    returnStmt                     shift and go to state 83
+    breakStmt                      shift and go to state 84
+    simpleExpression               shift and go to state 74
+    orExpression                   shift and go to state 33
+    unaryRelExpression             shift and go to state 34
+    relExpression                  shift and go to state 36
+    addExpression                  shift and go to state 37
+    term                           shift and go to state 38
+    unaryExpression                shift and go to state 39
+    factor                         shift and go to state 40
+    var                            shift and go to state 42
+    call                           shift and go to state 43
+    constant                       shift and go to state 44
+
+state 152
+
+    (45) selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .
+
+    BLOCKCOMMENT    reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    INT             reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FLOAT           reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    CHAR            reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    BOOL            reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    VOID            reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    $end            reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    WHILE           reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    RBRACE          reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    SEMMICOLON      reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    LBRACE          reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    IF              reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FOR             reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    DO              reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    RETURN          reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    BREAK           reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    IDENTIFIER      reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    NOT             reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    LBRACKET        reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    INTNUMBER       reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FLOATNUMBER     reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FALSE           reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    TRUE            reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+    ELSE            reduce using rule 45 (selectionStmt -> IF LPAREN expression RPAREN statement ELSE statement .)
+
+
+state 153
+
+    (47) iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .
+
+    BLOCKCOMMENT    reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    INT             reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    FLOAT           reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    CHAR            reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    BOOL            reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    VOID            reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    $end            reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    WHILE           reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    RBRACE          reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    SEMMICOLON      reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    LBRACE          reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    IF              reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    FOR             reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    DO              reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    RETURN          reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    BREAK           reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    IDENTIFIER      reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    NOT             reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    LBRACKET        reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    INTNUMBER       reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    FLOATNUMBER     reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    FALSE           reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    TRUE            reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+    ELSE            reduce using rule 47 (iterationStmt -> FOR LPAREN IDENTIFIER IN IDENTIFIER RPAREN statement .)
+
+
+state 154
+
+    (48) iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .
+
+    BLOCKCOMMENT    reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    INT             reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    CHAR            reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    BOOL            reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    VOID            reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    $end            reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    RBRACE          reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    SEMMICOLON      reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    IF              reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    DO              reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    RETURN          reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    BREAK           reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    IDENTIFIER      reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    NOT             reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    LBRACKET        reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    INTNUMBER       reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    FLOATNUMBER     reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    FALSE           reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    TRUE            reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+    ELSE            reduce using rule 48 (iterationStmt -> DO statement WHILE LPAREN expression RPAREN statement .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 73 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 73 resolved as shift
+WARNING: shift/reduce conflict for RBRACKET in state 104 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 145 resolved as shift
+WARNING: reduce/reduce conflict in state 39 resolved using rule (term -> unaryExpression)
+WARNING: rejected rule (unaryExpression -> unaryExpression) in state 39
+WARNING: reduce/reduce conflict in state 99 resolved using rule (term -> term mulop unaryExpression)
+WARNING: rejected rule (unaryExpression -> unaryExpression) in state 99
+WARNING: Rule (unaryExpression -> unaryExpression) is never reduced

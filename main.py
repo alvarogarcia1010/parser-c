@@ -5,46 +5,16 @@ from utilities.identificador import Identificador
 from grammar.parsingTable import parsingTable
 from grammar.parsingTable import terminales
 
-identifiers = list()
 tokenSymbols = list()
 parserTokens = list()
-
-isIdentifierType = False
-isAssignmentType = False
-isVarType = False
-tokenValue = ''
-
-indexTokenV1 = 0
-indexToken = 0
-counter = 0
 
 tokens = readSource('./Examples/SuccessfulExample.c')
 #tokens = readSource('./Examples/FailedExample.c')
 
 for token in tokens:
   if token.type not in [Types.SPACE]:
-    # Llenamos la lista que le pasaremos al parser
     parserTokens.append(token.type.name)           
     tokenSymbols.append(token.value)
-
-    if (token.type == Types.FLOAT or token.type == Types.INT):
-      isVarType = True
-      indexTokenV1 = tokens.index(token)
-
-    if (token.type == Types.IDENTIFIER and tokens.index(token)-2 == indexTokenV1):
-      isIdentifierType = True
-      tokenValue = token.value
-      indexToken = tokens.index(token)
-
-    if (token.type == Types.ASIGNACION and tokens.index(token)-2 == indexToken):
-      isAssignmentType = True
-
-    if (token.type == Types.INT_VAL or token.type == Types.FLOAT_VAL or token.type == Types.BOOLEAN_VAL and isAssignmentType):
-      identifier = Identificador(tokenValue, token.value, token.type)
-      identifiers.append(identifier)
-      isVarType = False
-      isIdentifierType = False
-      isAssignmentType = False
 
 #Instanciación de la pila
 stack = ['EOF', 0]
@@ -60,7 +30,7 @@ def agregar_pila(produccion):
 		if elemento != 'vacia':
 			stack.append(elemento)
 
-x = stack[-1] #primer elemento de der a izq
+x = stack[-1]
 position = 0
 numberOfLine = 1
 
@@ -68,7 +38,6 @@ syntaxErrors = []
 
 while (len(stack) > 0):
 	if x == parserTokens[position] and x == 'EOF':
-		#Estructura if creada para imprimir los syntaxErrors si los hay, o sino mostrar que no
 		if (len(syntaxErrors) != 0):
 			print("Fallo al compilar:")
 			for error in syntaxErrors:
