@@ -1,6 +1,7 @@
 from utilities.types import Types
 
 def analizador_semantico(tokens):
+	print('<---- Analizador semántico ---->')
 	listtokens = []
 	asignaciones = []
 
@@ -107,7 +108,9 @@ def analizador_semantico(tokens):
 						error = "La variable " + asig[i].value + " nunca ha sido declarada"
 						print(error)
 						#raise Exception(error)
-      
+	print("<---- Codigo intermedio ----->")    
+	for k in asignaciones:
+		print(k)
     
 	
 

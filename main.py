@@ -36,6 +36,8 @@ numberOfLine = 1
 
 syntaxErrors = []
 
+print('<---- Analizador sintáctico ---->')
+
 while (len(stack) > 0):
 	if x == parserTokens[position] and x == 'EOF':
 		if (len(syntaxErrors) != 0):
@@ -44,6 +46,7 @@ while (len(stack) > 0):
 					print(error)
 		else:
 			print("Programa compilado con exito")
+			analizador_semantico(tokens)
 		break
 	else:
 		if x == parserTokens[position] and x != 'EOF':
@@ -75,6 +78,3 @@ while (len(stack) > 0):
 				agregar_pila(celda)
 				x=stack[-1]
 	#print(stack)
-
-print('<---- Analizador semántico ---->')
-analizador_semantico(tokens)
