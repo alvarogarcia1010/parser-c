@@ -6,7 +6,7 @@ int main () {
     // Parentesis de mas
     if (contador != 5)) {
         resultado = ((9 + 8) - (11*2)) % cualquierCosa;
-        contador =  contador + 1;
+        contador =  contador + 1
     } else {
         int otroResultado;
         // Error de asignación

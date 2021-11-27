@@ -1,3 +1,4 @@
+from utilities.semantic import analizador_semantico
 from utilities.types import Types
 from utilities.lexer import readSource
 from utilities.identificador import Identificador
@@ -106,3 +107,5 @@ while (len(stack) > 0):
 				x=stack[-1]
 	#print(stack)
 
+print('<---- Analizador semántico ---->')
+analizador_semantico(tokens)
