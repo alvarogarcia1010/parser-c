@@ -355,7 +355,7 @@ def parserData(data):
 	result = parser.parse(data)
 	print(result)
 
-readSource('./Examples/SuccessfulExample.c')
+readSource('../Examples/SuccessfulExample.c')
 
 
 
